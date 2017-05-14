@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name">监理</string>
+    <string name="title_home">首页</string>
+    <string name="title_me">我</string>
+    <string name="send_fail">发送失败%1$d次</string>
+
+    <string name="cp_select_city">选择城市</string>
+    <string name="cp_hot_city">热门城市</string>
+    <string name="cp_located_city">定位城市</string>
+    <string name="cp_hint_search_box">请输入城市名或拼音</string>
+    <string name="cp_nothing_found">没有搜索结果~</string>
+    <string name="cp_locating">正在定位…</string>
+    <string name="cp_located_failed">定位失败</string>
+
+    <string name="the_end_project">已结束项目</string>
+    <string-array name="end_project_tab">
+        <item>竣工项目</item>
+        <item>抢单结束</item>
+    </string-array>
+
+    <string name="send_data_fail">发布资料失败</string>
+    <string name="forget_pwd">忘记密码</string>
+    <string name="my_message">我的消息</string>
+
+    <string name="project_detail">项目详情</string>
+    <string-array name="project_detail_tab">
+        <item>装修信息</item>
+        <item>客户信息</item>
+        <item>客户分析</item>
+    </string-array>
+
+    <string name="reset_pwd_title">登录</string>
+
+    <string-array name="send_msg_fail_tab">
+        <item>工作记录</item>
+        <item>位置信息</item>
+    </string-array>
+
+    <string name="send_msg_fail">未发送信息</string>
+    <string name="screen">筛选</string>
+    <string name="upload_data">上传资料</string>
+    <string name="write_work_record">填写工作记录</string>
+    <string name="save">保存</string>
+
+    <string name="error_code">错误码：</string>
+    <string name="error_code_simple">1101</string>
+    <string name="error_body_simple"><![CDATA[由于网络信号较差，提交工作日志失败，程序每10分钟自动再次提交，详情请了解我>>工作日志提交模块]]></string>
+    <string name="send_fail_btn_txt"><![CDATA[转到我>>工作日志提交模块]]></string>
+    <string name="please_input_mobile_phone">请输入手机号</string>
+    <string name="please_input_verification_code">请输入验证码</string>
+    <string name="send_verification_code">发送验证码</string>
+    <string name="next">下一步</string>
+    <string name="project_title_simple">创业公司装修</string>
+    <string name="project_time_simple">2017-3-28 19:00</string>
+    <string name="project_tv1">客户经理</string>
+    <string name="projecr_manager_simple">赵晓芬</string>
+    <string name="mobile_phone">手机号码：</string>
+    <string name="_186_8152_9205">mobile_phone_simple</string>
+    <string name="please_input_pwd">请输入密码</string>
+    <string name="please_input_pwd_again">请再次输入密码</string>
+    <string name="sign_in">登录</string>
+    <string name="now_select">当前选择</string>
+    <string name="time_period">时间周期</string>
+    <string name="sure">确定</string>
+    <string name="work_record_input_hint">来写写今天做了什么工作</string>
+    <string name="cancel">取消</string>
+    <string name="name_simple">韦先生</string>
+    <string name="job_simple">监理</string>
+    <string name="mobile_phone_simple">18681529205</string>
+    <string name="the_send_fail">未发送成功</string>
+    <string name="number_simple">7</string>
+    <string name="sign_out">退出登录</string>
+    <string name="type">类别</string>
+    <string name="project_data">项目资料</string>
+    <string name="date_simple">5月4日</string>
+    <string name="time_simple">23:17:09</string>
+    <string name="simple_msg">你已被指派为xxx项目的助理，请切实做好质量检测监督工作</string>
+    <string name="work_record">工作记录</string>
+    <string name="project_manager">项目经理</string>
+    <string name="address_simple">广东省深圳市宝安区西乡大道</string>
+    <string name="simple_work_record_type">预约记录</string>
+    <string name="simple_work_record_body">今天花了很多时间,看下装修结果吧.今天花了很多时间,看下装修结果吧今天花了很多时间,看下装修结果吧今天花了很多时间,看下装修结果吧今天花了很多时间,看下装修结果吧</string>
+    <string name="import_data">输入资料</string>
+    <string name="loading">加载中...</string>
+
+
+</resources>

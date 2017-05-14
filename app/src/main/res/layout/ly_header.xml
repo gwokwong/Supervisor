@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/title_bar_height"
+    android:background="@color/title_bar_bg">
+
+
+    <Button
+        android:id="@+id/back_btn"
+        android:layout_width="50px"
+        android:layout_height="50px"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15px"
+        android:background="@drawable/sele_back_btn"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@color/title_color"
+        android:textSize="@dimen/title_text_size" />
+
+
+    <Button
+        android:id="@+id/right_btn"
+        android:layout_width="54px"
+        android:layout_height="54px"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="15px"
+        android:textSize="24px"
+        android:visibility="gone" />
+
+
+    <TextView
+        android:id="@+id/right_txt"
+        android:layout_width="120px"
+        android:layout_height="80px"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:textSize="30px"
+        android:textColor="@color/project_item_text_color"
+        android:gravity="center"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/top_bar_line" />
+
+
+</RelativeLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/body_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/ly_header" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25px"
+            android:layout_marginTop="20px"
+            android:text="@string/now_select" />
+
+
+        <GridView
+            android:id="@+id/select_gv1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="25px"
+            android:layout_marginTop="20px"
+            android:horizontalSpacing="25px"
+            android:numColumns="3"
+            android:verticalSpacing="25px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25px"
+            android:layout_marginTop="20px"
+            android:text="@string/time_period" />
+
+
+        <GridView
+            android:id="@+id/select_gv2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="25px"
+            android:layout_marginTop="20px"
+            android:horizontalSpacing="25px"
+            android:numColumns="3"
+            android:verticalSpacing="25px" />
+
+        <Button
+            android:id="@+id/select_ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="25px"
+            android:gravity="center"
+            android:padding="20px"
+            style="@style/CommonButton"
+            android:text="@string/sure"
+            android:textColor="@color/white"
+            android:textSize="30px" />
+
+    </LinearLayout>
+
+</LinearLayout>

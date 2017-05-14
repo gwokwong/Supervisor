@@ -1,0 +1,166 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/body_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/me_head_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="50px">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/me_head"
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100px"
+            android:src="@mipmap/cloudwalk_face_head"
+            app:riv_border_color="@color/colorPrimary"
+            app:riv_border_width="3px"
+            app:riv_oval="true" />
+
+        <TextView
+            android:id="@+id/me_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/me_head"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20px"
+            android:text="@string/name_simple"
+            android:textColor="@color/black"
+            android:textSize="32px" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/me_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/me_job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/job_simple"
+                android:textColor="@color/project_item_text_color"
+                android:textSize="26px" />
+
+            <TextView
+                android:id="@+id/me_mobile_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:text="@string/mobile_phone_simple"
+                android:textColor="@color/project_item_text_color"
+                android:textSize="26px" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10px"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/me_msg"
+            style="@style/me_list_ll"
+            android:background="?attr/selectableItemBackground">
+
+            <ImageView
+                style="@style/me_list_icon"
+                android:layout_width="54px"
+                android:layout_height="54px"
+                android:src="@mipmap/ic_menu_notifications" />
+
+            <TextView
+                style="@style/me_list_title"
+                android:text="@string/my_message" />
+
+            <TextView
+                android:id="@+id/me_msg_count"
+                style="@style/me_list_number"
+                android:text="" />
+
+            <ImageView
+                style="@style/me_list_arrow" />
+
+
+        </LinearLayout>
+
+        <View style="@style/me_list_line" />
+
+        <LinearLayout
+            android:id="@+id/me_end_project"
+            style="@style/me_list_ll"
+            android:background="?attr/selectableItemBackground">
+
+            <ImageView
+                style="@style/me_list_icon"
+                android:src="@mipmap/ic_menu_attachment" />
+
+            <TextView
+                style="@style/me_list_title"
+                android:text="@string/the_end_project" />
+
+            <TextView
+                style="@style/me_list_number"
+                android:text="" />
+
+            <ImageView
+                style="@style/me_list_arrow" />
+
+
+        </LinearLayout>
+
+        <View style="@style/me_list_line" />
+
+        <LinearLayout
+            android:id="@+id/me_send_error"
+            style="@style/me_list_ll"
+            android:background="?attr/selectableItemBackground">
+
+            <ImageView
+                style="@style/me_list_icon"
+                android:src="@mipmap/ic_menu_edit" />
+
+            <TextView
+                style="@style/me_list_title"
+                android:text="@string/the_send_fail" />
+
+            <TextView
+                android:id="@+id/me_send_fail_count"
+                style="@style/me_list_number"
+                android:text="@string/number_simple" />
+
+            <ImageView
+                style="@style/me_list_arrow" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/me_logout_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sign_button_height"
+        android:layout_marginTop="25px"
+        android:background="@drawable/item_selector"
+        android:text="@string/sign_out"
+        android:textColor="@color/colorPrimary"
+        android:textSize="32px" />
+
+
+</LinearLayout>

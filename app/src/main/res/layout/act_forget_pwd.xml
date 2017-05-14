@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.sttech.supervisor.ui.activity.MainActivity">
+
+    <include layout="@layout/ly_header" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sign_text_input_height"
+        android:layout_marginLeft="@dimen/sign_margin_left_right"
+        android:layout_marginRight="@dimen/sign_margin_left_right"
+        android:layout_marginTop="20px">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/please_input_mobile_phone" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sign_text_input_height"
+        android:layout_marginLeft="@dimen/sign_margin_left_right"
+        android:layout_marginRight="@dimen/sign_margin_left_right"
+        android:layout_marginTop="20px"
+        android:orientation="horizontal">
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/please_input_verification_code" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/send_verification_code"
+            android:layout_width="220px"
+            android:layout_height="70px"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20px"
+            android:background="@color/colorPrimary"
+            android:onClick="forgetOnClick"
+            android:text="@string/send_verification_code"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/next_btn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sign_button_height"
+        android:layout_marginLeft="@dimen/sign_margin_left_right"
+        android:layout_marginRight="@dimen/sign_margin_left_right"
+        android:layout_marginTop="30px"
+        android:background="@color/colorPrimary"
+        android:onClick="forgetOnClick"
+        android:text="@string/next"
+        android:textColor="@android:color/white"
+        android:textSize="32px" />
+
+
+</LinearLayout>
