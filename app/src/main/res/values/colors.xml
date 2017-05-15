@@ -42,6 +42,7 @@
     <color name="cancelControlHighlight">#8c8a8a</color>
     <color name="colorButtonNormal">#ff5500</color>
     <color name="colorControlHighlight">#c65015</color>
+    <color name="colorControlUnEnable">#8496a0</color>
     <color name="top_bar_line">#e0e0e0</color>
     <color name="loading_txt">#60000000</color>
 

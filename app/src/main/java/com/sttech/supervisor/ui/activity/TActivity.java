@@ -44,6 +44,10 @@ public abstract class TActivity extends AutoLayoutActivity {
         Toasty.success(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
 
+    public void toaste(String msg) {
+        Toasty.error(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+    }
+
 
     /**
      * @param title

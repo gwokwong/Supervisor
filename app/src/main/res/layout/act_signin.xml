@@ -13,6 +13,7 @@
         android:src="@mipmap/ic_launcher" />
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/usernameWrapper"
         android:layout_width="match_parent"
         android:layout_height="@dimen/sign_text_input_height"
         android:layout_marginLeft="@dimen/sign_margin_left_right"
@@ -27,6 +28,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/passwordWrapper"
         android:layout_width="match_parent"
         android:layout_height="@dimen/sign_text_input_height"
         android:layout_marginLeft="@dimen/sign_margin_left_right"
@@ -45,9 +47,9 @@
         style="@style/CommonButton"
         android:layout_width="match_parent"
         android:layout_height="80px"
-        android:layout_marginTop="20px"
         android:layout_marginLeft="@dimen/sign_margin_left_right"
         android:layout_marginRight="@dimen/sign_margin_left_right"
+        android:layout_marginTop="20px"
         android:onClick="signInOnClick"
         android:text="@string/sign_in"
         android:textColor="@android:color/white"

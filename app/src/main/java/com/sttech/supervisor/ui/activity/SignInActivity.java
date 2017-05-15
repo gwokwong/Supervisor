@@ -6,15 +6,20 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
+import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
+import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.Constant;
 import com.sttech.supervisor.MyApp;
 import com.sttech.supervisor.R;
 import com.sttech.supervisor.db.LocationInfo;
 import com.sttech.supervisor.ui.fragment.dialog.DialogFragmentHelper;
 import com.sttech.supervisor.utils.SpUtils;
+import com.sttech.supervisor.utils.StrUtils;
 
 import java.util.ArrayList;
 
@@ -36,6 +41,7 @@ public class SignInActivity extends TActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_signin);
+        initView();
         LocationInfo info = new LocationInfo();
         ArrayList<LocationInfo> list = new ArrayList<>();
 //        for (int i = 80; i < 119; i++) {
@@ -54,6 +60,17 @@ public class SignInActivity extends TActivity {
 
     }
 
+
+    private TextInputLayout usernameWrapper, passwordWrapper;
+
+    private void initView() {
+        usernameWrapper = findById(R.id.usernameWrapper);
+        passwordWrapper = findById(R.id.passwordWrapper);
+//        usernameWrapper.setHint("Username");
+//        passwordWrapper.setHint("Password");
+
+    }
+
     @Override
     public void onCreateBinding() {
 
@@ -61,7 +78,7 @@ public class SignInActivity extends TActivity {
 
     public void signInOnClick(View view) {
         if (view.getId() == R.id.sign_in) {
-            doSignIn();
+            doValidate();
         } else if (view.getId() == R.id.forget_pwd) {
             ForgetPwdActivity.start(SignInActivity.this);
         }
@@ -69,10 +86,50 @@ public class SignInActivity extends TActivity {
 
     private DialogFragment mDialogFragment;
 
+    public boolean validatePassword(String password) {
+        return password.length() > 5;
+    }
+
+
+    private void hideKeyboard() {
+        View view = getCurrentFocus();
+        if (view != null) {
+            ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).
+                    hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+
+
     /**
-     * 登录操作
+     * 验证基本信息
      */
-    private void doSignIn() {
+    private void doValidate() {
+        hideKeyboard();
+        String username = usernameWrapper.getEditText().getText().toString();
+        String password = passwordWrapper.getEditText().getText().toString();
+        Logger.d("username password" + username + "|" + password);
+        if (TextUtils.isEmpty(username)) {
+            toaste("手机号码不能为空");
+        } else if (!StrUtils.validatePhoneNumber(username)) {
+            Logger.d("!validateUserName");
+            toaste("手机号码输入错误");
+            usernameWrapper.setError("Not a valid email address!");
+        } else if (TextUtils.isEmpty(password)) {
+            toaste("密码不能为空");
+        } else if (!validatePassword(password)) {
+            Logger.d("!validatePassword");
+            toaste("密码输入不正确");
+            passwordWrapper.setError("Not a valid password!");
+        } else {
+            Logger.d("!setErrorEnabled");
+            usernameWrapper.setErrorEnabled(false);
+            passwordWrapper.setErrorEnabled(false);
+            doLogin();
+        }
+
+    }
+
+    private void doLogin() {
         mDialogFragment = DialogFragmentHelper.showProgress(getSupportFragmentManager(), "正在加载中");
         h.sendEmptyMessageDelayed(0, 3000);
     }

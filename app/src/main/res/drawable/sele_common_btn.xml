@@ -19,6 +19,15 @@
         </shape>
     </item>
 
+    <item android:state_enabled="false">
+        <shape>
+            <corners android:radius="5dp" />
+            <solid android:color="@color/colorControlUnEnable" />
+        </shape>
+    </item>
+
+
+
     <item>
         <shape>
             <corners android:radius="5dp" />
