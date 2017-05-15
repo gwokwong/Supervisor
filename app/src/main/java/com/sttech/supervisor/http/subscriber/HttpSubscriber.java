@@ -62,9 +62,12 @@ public class HttpSubscriber<T> implements Observer<T> {
             if (msg.contains("#")) {
                 code = Integer.parseInt(msg.split("#")[0]);
                 mOnResultListener.onError(code, msg.split("#")[1]);
+                mOnResultListener.onCompleted();
             } else {
                 code = ApiException.Code_Default;
                 mOnResultListener.onError(code, msg);
+                mOnResultListener.onCompleted();
+
             }
         }
     }

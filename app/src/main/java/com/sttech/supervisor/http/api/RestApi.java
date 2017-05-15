@@ -2,6 +2,8 @@ package com.sttech.supervisor.http.api;
 
 
 import com.sttech.supervisor.entity.Daily;
+import com.sttech.supervisor.http.entity.MobileLoginResultDto;
+import com.sttech.supervisor.http.entity.MobileResponse;
 
 import java.util.Map;
 
@@ -22,32 +24,40 @@ import retrofit2.http.QueryMap;
 public interface RestApi {
 
     @FormUrlEncoded
-    @POST("query?key=7c2d1da3b8634a2b9fe8848c3a9edcba")
-    Observable<ApiResponse<TestBean>> getDatas(@Field("pno") int pno, @Field("ps") int ps, @Field("dtype") String dtype);
+    @POST("login")
+    Observable<MobileResponse<String>> login(@Field("accountText") String account, @Field("password") String password);
 
-    @GET("news/latest")
-    Observable<Daily> getDaily();
+    @POST("data/location")
+    Observable<MobileResponse<String>> getLocation();
 
-    @POST("{url}")
-    Observable<Daily> executePost(
-            @Path("url") String url,
-            @QueryMap Map<String, String> maps);
 
-    @FormUrlEncoded
-    @POST("/newfind/index_ask")
-    Observable<Daily> getDaJia(@Field("page") int page,
-                               @Field("pageSize") int size,
-                               @Field("tokenMark") long tokenMark,
-                               @Field("token") String token
-    );
-
-    @FormUrlEncoded
-    @POST("FundPaperTrade/AppUserLogin")
-    Observable<Daily> getTransData(@FieldMap Map<String, String> map);
-
-    @Multipart
-    @POST("v1/public/core/?service=user.updateAvatar")
-    Observable<Daily> uploadMultipleTypeFile(@Part("data") String des, @PartMap Map<String, RequestBody> params);
+//    @FormUrlEncoded
+//    @POST("query?key=7c2d1da3b8634a2b9fe8848c3a9edcba")
+//    Observable<ApiResponse<TestBean>> getDatas(@Field("pno") int pno, @Field("ps") int ps, @Field("dtype") String dtype);
+//
+//    @GET("news/latest")
+//    Observable<Daily> getDaily();
+//
+//    @POST("{url}")
+//    Observable<Daily> executePost(
+//            @Path("url") String url,
+//            @QueryMap Map<String, String> maps);
+//
+//    @FormUrlEncoded
+//    @POST("/newfind/index_ask")
+//    Observable<Daily> getDaJia(@Field("page") int page,
+//                               @Field("pageSize") int size,
+//                               @Field("tokenMark") long tokenMark,
+//                               @Field("token") String token
+//    );
+//
+//    @FormUrlEncoded
+//    @POST("FundPaperTrade/AppUserLogin")
+//    Observable<Daily> getTransData(@FieldMap Map<String, String> map);
+//
+//    @Multipart
+//    @POST("v1/public/core/?service=user.updateAvatar")
+//    Observable<Daily> uploadMultipleTypeFile(@Part("data") String des, @PartMap Map<String, RequestBody> params);
 
 //    public void uploadFile() {
 //        String path1 = Environment.getExternalStorageDirectory() + File.separator + "test.png";

@@ -283,7 +283,7 @@ public class HomeFragment extends TFragment {
                     sb.append("无法获取有效定位依据导致定位失败，一般是由于手机的原因，处于飞行模式下一般会造成这种结果，可以试着重启手机");
                 }
 //                logMsg(sb.toString());  //todo 传递定位结果
-                Logger.d("HomeFragment" + sb.toString());
+//                Logger.d("HomeFragment" + sb.toString());
             } else {
                 mHandlder.obtainMessage(1, location.getCity()).sendToTarget();
             }

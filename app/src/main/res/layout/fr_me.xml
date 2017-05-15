@@ -88,8 +88,7 @@
 
             <TextView
                 android:id="@+id/me_msg_count"
-                style="@style/me_list_number"
-                android:text="" />
+                style="@style/me_list_number" />
 
             <ImageView
                 style="@style/me_list_arrow" />

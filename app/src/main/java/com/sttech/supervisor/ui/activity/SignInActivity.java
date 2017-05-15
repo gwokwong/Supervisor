@@ -17,7 +17,12 @@ import com.sttech.supervisor.Constant;
 import com.sttech.supervisor.MyApp;
 import com.sttech.supervisor.R;
 import com.sttech.supervisor.db.LocationInfo;
+import com.sttech.supervisor.http.HttpManager;
+import com.sttech.supervisor.http.callback.OnResultCallBack;
+import com.sttech.supervisor.http.entity.MobileLoginResultDto;
+import com.sttech.supervisor.http.subscriber.HttpSubscriber;
 import com.sttech.supervisor.ui.fragment.dialog.DialogFragmentHelper;
+import com.sttech.supervisor.utils.Base64Utils;
 import com.sttech.supervisor.utils.SpUtils;
 import com.sttech.supervisor.utils.StrUtils;
 
@@ -104,34 +109,92 @@ public class SignInActivity extends TActivity {
      * 验证基本信息
      */
     private void doValidate() {
-        hideKeyboard();
-        String username = usernameWrapper.getEditText().getText().toString();
-        String password = passwordWrapper.getEditText().getText().toString();
-        Logger.d("username password" + username + "|" + password);
-        if (TextUtils.isEmpty(username)) {
-            toaste("手机号码不能为空");
-        } else if (!StrUtils.validatePhoneNumber(username)) {
-            Logger.d("!validateUserName");
-            toaste("手机号码输入错误");
-            usernameWrapper.setError("Not a valid email address!");
-        } else if (TextUtils.isEmpty(password)) {
-            toaste("密码不能为空");
-        } else if (!validatePassword(password)) {
-            Logger.d("!validatePassword");
-            toaste("密码输入不正确");
-            passwordWrapper.setError("Not a valid password!");
-        } else {
-            Logger.d("!setErrorEnabled");
-            usernameWrapper.setErrorEnabled(false);
-            passwordWrapper.setErrorEnabled(false);
-            doLogin();
-        }
+//        hideKeyboard();
+//        String username = usernameWrapper.getEditText().getText().toString();
+//        String password = passwordWrapper.getEditText().getText().toString();
+//        Logger.d("username password" + username + "|" + password);
+//        if (TextUtils.isEmpty(username)) {
+//            toaste("手机号码不能为空");
+//        } else if (!StrUtils.validatePhoneNumber(username)) {
+//            Logger.d("!validateUserName");
+//            toaste("手机号码输入错误");
+//            usernameWrapper.setError("Not a valid email address!");
+//        } else if (TextUtils.isEmpty(password)) {
+//            toaste("密码不能为空");
+//        } else if (!validatePassword(password)) {
+//            Logger.d("!validatePassword");
+//            toaste("密码输入不正确");
+//            passwordWrapper.setError("Not a valid password!");
+//        } else {
+//            Logger.d("!setErrorEnabled");
+//            usernameWrapper.setErrorEnabled(false);
+//            passwordWrapper.setErrorEnabled(false);
+//            doLogin();
+//        }
+
+        doLogin();
 
     }
 
     private void doLogin() {
-        mDialogFragment = DialogFragmentHelper.showProgress(getSupportFragmentManager(), "正在加载中");
-        h.sendEmptyMessageDelayed(0, 3000);
+//        mDialogFragment = DialogFragmentHelper.showProgress(getSupportFragmentManager(), "正在加载中");
+//        h.sendEmptyMessageDelayed(0, 3000);
+        HttpSubscriber httpSubscriber = new HttpSubscriber(new OnResultCallBack<String>() {
+
+            @Override
+            public void onStart() {
+                Logger.d("onStart");
+                mDialogFragment = DialogFragmentHelper.showProgress(getSupportFragmentManager(), "正在登录中...");
+            }
+
+            @Override
+            public void onSuccess(String data) {
+                Logger.d("onSuccess" + data);
+                toast(data);
+
+                //设计唯一的记录用户已登录
+                SpUtils.put(Constant.SP_KEY_IS_FIRST, false);
+//                MyApp.getInstance().setLogin(true);
+
+                SpUtils.put(Constant.SP_KEY_IS_LOGIN, true);
+
+
+
+
+                MainActivity.start(SignInActivity.this);
+                finish();
+            }
+
+            @Override
+            public void onError(int code, String errorMsg) {
+                Logger.d("onError" + errorMsg);
+                toaste(errorMsg);
+
+            }
+
+            @Override
+            public void onCompleted() {
+                Logger.d("onCompleted");
+                mDialogFragment.dismiss();
+            }
+        });
+
+        HttpManager.getInstance().login(httpSubscriber, "opt_0215", Base64Utils.encryptBase64("123456"));
+
+
+//        HttpSubscriber httpSubscriber = new HttpSubscriber(new OnResultCallBack<Daily>() {
+//                            @Override
+//                            public void onSuccess(Daily daily) {
+//                                Logger.d("onSuccess" + daily.toString());
+//                                locationInfo.tryTimes = 82;
+//                                locationInfo.update();
+//                            }
+//
+//                            @Override
+//                            public void onError(int code, String errorMsg) {
+//                                Logger.d("onError: code:" + code + "  errorMsg:" + errorMsg);
+//                            }
+//                        });
     }
 
     Handler h = new Handler() {

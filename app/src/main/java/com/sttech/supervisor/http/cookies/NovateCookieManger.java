@@ -2,6 +2,8 @@ package com.sttech.supervisor.http.cookies;
 
 import android.content.Context;
 
+import com.orhanobut.logger.Logger;
+
 import java.util.List;
 
 import okhttp3.Cookie;
@@ -36,6 +38,7 @@ public class NovateCookieManger implements CookieJar {
         if (cookies != null && cookies.size() > 0) {
             for (Cookie item : cookies) {
                 cookieStore.add(url, item);
+                Logger.d("url->" + item);
             }
         }
     }

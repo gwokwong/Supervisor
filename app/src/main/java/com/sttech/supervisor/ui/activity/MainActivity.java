@@ -9,11 +9,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import com.orhanobut.logger.Logger;
+import com.sttech.supervisor.Constant;
 import com.sttech.supervisor.R;
 import com.sttech.supervisor.entity.Daily;
 import com.sttech.supervisor.event.MeEvent;
@@ -22,7 +24,9 @@ import com.sttech.supervisor.ui.fragment.HomeFragment;
 import com.sttech.supervisor.ui.fragment.MeFragment;
 import com.sttech.supervisor.http.callback.OnResultCallBack;
 import com.sttech.supervisor.http.subscriber.HttpSubscriber;
+import com.sttech.supervisor.ui.fragment.dialog.DialogFragmentHelper;
 import com.sttech.supervisor.utils.Base64Utils;
+import com.sttech.supervisor.utils.SpUtils;
 
 import java.util.ArrayList;
 
@@ -67,43 +71,80 @@ public class MainActivity extends TActivity {
         test();
     }
 
+    private DialogFragment mDialogFragment;
+
     private void test() {
+
+        boolean isLogin = (boolean) SpUtils.get(Constant.SP_KEY_IS_LOGIN, false);
+        Logger.d("isLogin->" + isLogin);
+
+        HttpSubscriber httpSubscriber = new HttpSubscriber(new OnResultCallBack<String>() {
+
+            @Override
+            public void onStart() {
+//                Logger.d("onStart");
+                mDialogFragment = DialogFragmentHelper.showProgress(getSupportFragmentManager(), "努力加载数据...");
+            }
+
+            @Override
+            public void onSuccess(String data) {
+                Logger.d("onSuccess" + data);
+                toast(data);
+            }
+
+            @Override
+            public void onError(int code, String errorMsg) {
+                Logger.d("onError" + errorMsg);
+                toaste(errorMsg);
+
+            }
+
+            @Override
+            public void onCompleted() {
+//                Logger.d("onCompleted");
+                mDialogFragment.dismiss();
+            }
+        });
+
+        HttpManager.getInstance().getLocation(httpSubscriber);
+
+
 //        String name = "韦国旺";
 //        Logger.d("加密前->" + name);
 //        String name1 = Base64Utils.encryptBase64(name);
 //        Logger.d("加密后->" + name1);
 //        String name2 = Base64Utils.decryptBase64(name1);
 //        Logger.d("解密后->" + name2);
-        HttpSubscriber httpSubscriber = new HttpSubscriber(new OnResultCallBack<Daily>() {
-
-            @Override
-            public void onStart() {
-                toast("开始请求");
-                Logger.d("开始请求");
-            }
-
-            @Override
-            public void onSuccess(Daily daily) {
-                toast("请求成功" + daily.toString());
-                Logger.d("请求成功" + daily.toString());
-
-            }
-
-            @Override
-            public void onError(int code, String errorMsg) {
-                toast("请求失败");
-                Logger.d("请求失败");
-
-            }
-
-            @Override
-            public void onCompleted() {
-                toast("请求结束");
-                Logger.d("请求结束");
-
-            }
-        });
-        HttpManager.getInstance().getDailyWithCache2(httpSubscriber, true, 1);
+//        HttpSubscriber httpSubscriber = new HttpSubscriber(new OnResultCallBack<Daily>() {
+//
+//            @Override
+//            public void onStart() {
+//                toast("开始请求");
+//                Logger.d("开始请求");
+//            }
+//
+//            @Override
+//            public void onSuccess(Daily daily) {
+//                toast("请求成功" + daily.toString());
+//                Logger.d("请求成功" + daily.toString());
+//
+//            }
+//
+//            @Override
+//            public void onError(int code, String errorMsg) {
+//                toast("请求失败");
+//                Logger.d("请求失败");
+//
+//            }
+//
+//            @Override
+//            public void onCompleted() {
+//                toast("请求结束");
+//                Logger.d("请求结束");
+//
+//            }
+//        });
+//        HttpManager.getInstance().getDailyWithCache2(httpSubscriber, true, 1);
 
 
     }
@@ -229,7 +270,7 @@ public class MainActivity extends TActivity {
 
     @Subscribe(threadMode = ThreadMode.MainThread)
     public void onMeEvent(MeEvent event) {
-        Logger.d("收到消息"+event.number);
+        Logger.d("收到消息" + event.number);
         meFragment.updateCount(event.type, event.number);
 
     }

@@ -54,7 +54,12 @@ public class MeFragment extends TFragment implements View.OnClickListener {
     public void updateCount(int type, int number) {
         Logger.d("type number" + type + "|" + number);
         if (type == MeEvent.TYPE_MY_MSG) {
-            msgCountTv.setText(String.valueOf(number));
+            if (msgCountTv != null) {
+                msgCountTv.setText(String.valueOf(number));
+            } else {
+                Logger.d("msgCountTv is null");
+            }
+
         } else {
             sendFailCountTv.setText(String.valueOf(number));
         }
@@ -78,6 +83,8 @@ public class MeFragment extends TFragment implements View.OnClickListener {
         sendErrorll = (LinearLayout) view.findViewById(R.id.me_send_error);
         msgCountTv = (TextView) view.findViewById(R.id.me_msg_count);
         sendFailCountTv = (TextView) view.findViewById(R.id.me_send_fail_count);
+
+//        msgCountTv.setText("1000");
 
         logoutBtn.setOnClickListener(this);
         msgll.setOnClickListener(this);

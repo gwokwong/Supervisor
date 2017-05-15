@@ -3,6 +3,7 @@ package com.sttech.supervisor.ui.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.Constant;
 import com.sttech.supervisor.MyApp;
 import com.sttech.supervisor.R;
@@ -26,7 +27,9 @@ public class StartActivity extends TActivity {
 
     private void initData() {
         boolean isFirst = (boolean) SpUtils.get(Constant.SP_KEY_IS_FIRST, true);
-        if (isFirst || !MyApp.getInstance().isLogin()) {
+        boolean isLogin = (boolean) SpUtils.get(Constant.SP_KEY_IS_LOGIN, false);
+        Logger.d("isLogin->"+isLogin);
+        if (isFirst &&!isLogin) {
             SignInActivity.start(this);
             finish();
         } else {

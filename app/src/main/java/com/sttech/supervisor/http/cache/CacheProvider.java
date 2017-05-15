@@ -2,8 +2,6 @@ package com.sttech.supervisor.http.cache;
 
 
 import com.sttech.supervisor.entity.Daily;
-import com.sttech.supervisor.http.api.ApiResponse;
-import com.sttech.supervisor.http.api.TestBean;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,8 +14,8 @@ import io.rx_cache2.LifeCache;
 
 public interface CacheProvider {
 
-    @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
-    Observable<ApiResponse<TestBean>> getDatas(Observable<ApiResponse<TestBean>> oRepos, EvictProvider evictDynamicKey);
+//    @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
+//    Observable<ApiResponse<TestBean>> getDatas(Observable<ApiResponse<TestBean>> oRepos, EvictProvider evictDynamicKey);
 
 
     @LifeCache(duration = 365, timeUnit = TimeUnit.DAYS)

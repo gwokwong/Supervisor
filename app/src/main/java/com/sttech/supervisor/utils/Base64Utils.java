@@ -22,6 +22,14 @@ public class Base64Utils {
         return new String(Base64.encode(key.getBytes(), Base64.DEFAULT));
     }
 
+//    protected String encodeBase64(String rawString) {
+//
+//        Base64 base64 = new Base64();
+//
+//        return base64.encodeToString(rawString.getBytes());
+//
+//    }
+
 
     /**
      * base64解密
