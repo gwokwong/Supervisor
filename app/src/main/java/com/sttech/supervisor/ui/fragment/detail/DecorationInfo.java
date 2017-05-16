@@ -1,12 +1,9 @@
 package com.sttech.supervisor.ui.fragment.detail;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.sttech.supervisor.R;
+import com.sttech.supervisor.dto.ProjectDetailDto;
 import com.sttech.supervisor.ui.fragment.TFragment;
 
 /**
@@ -18,13 +15,7 @@ import com.sttech.supervisor.ui.fragment.TFragment;
 
 public class DecorationInfo extends TFragment {
 
-//    @Nullable
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.fr_decoration_info, container, false);
-//        return view;
-//    }
-
+    
     @Override
     public int provideContentViewId() {
         return R.layout.fr_decoration_info;
@@ -32,6 +23,15 @@ public class DecorationInfo extends TFragment {
 
     @Override
     public void initView(View rootView) {
+
+    }
+
+    /**
+     * 项目详情信息设置
+     *
+     * @param detailDto
+     */
+    public void setProjectDetail(ProjectDetailDto detailDto) {
 
     }
 

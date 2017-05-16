@@ -6,6 +6,8 @@ import android.util.Log;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.sttech.supervisor.Constant;
 import com.sttech.supervisor.dto.MobileResponse;
+import com.sttech.supervisor.dto.ProjectPageDto;
+import com.sttech.supervisor.entity.Daily;
 import com.sttech.supervisor.http.api.RestApi;
 import com.sttech.supervisor.http.cache.CacheProvider;
 import com.sttech.supervisor.http.cookies.NovateCookieManger;
@@ -15,14 +17,14 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import io.rx_cache2.DynamicKey;
+import io.rx_cache2.EvictDynamicKey;
 import io.rx_cache2.internal.RxCache;
 import io.victoralbertos.jolyglot.GsonSpeaker;
-import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -147,14 +149,46 @@ public class HttpManager {
 //        toSubscribe(mRestApi.getDatas(pno, ps, dtype), subscriber);
 //    }
 
+    public void getDaily(Observer<Daily> subscriber) {
+//        mRestApi.getDaily().subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(subscriber);
+    }
 
+    /**
+     * 登录
+     *
+     * @param subscriber
+     * @param account
+     * @param password
+     */
     public void login(Observer<String> subscriber, String account, String password) {
         toSubscribe(mRestApi.login(account, password), subscriber);
     }
 
+    /**
+     * 省市区信息
+     *
+     * @param subscriber
+     */
     public void getLocation(Observer<String> subscriber) {
         toSubscribe(mRestApi.getLocation(), subscriber);
     }
+
+    /**
+     * 详情详情
+     *
+     * @param subscriber
+     */
+    public void getProjectDetail(Observer<ProjectPageDto> subscriber, String projectId) {
+//        toSubscribe(mRestApi.projectDetail(), subscriber);
+        toSubscribe(cacheProvider.getProjectDetail(mRestApi.projectDetail(projectId), new EvictDynamicKey(true), new DynamicKey(projectId)), subscriber);
+    }
+
+
+//    public void getDailyWithCache2(Observer<Daily> subscriber, boolean update, int idLastUserQueried) {
+////        toSubscribe2(cacheProvider.getDaily2(mRestApi.getDaily(), new EvictDynamicKey(update), new DynamicKey(idLastUserQueried)), subscriber);
+////    }
 
     //    private <T> void toSubscribe(Observable<ApiResponse<T>> o, Observer<T> s) {
 //        o.subscribeOn(Schedulers.io())

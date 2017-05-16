@@ -5,7 +5,7 @@
     android:background="@drawable/bg_dialog"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingBottom="60px"
+    android:paddingBottom="40px"
     android:paddingLeft="40px"
     android:paddingRight="40px"
     android:paddingTop="50px">
@@ -22,38 +22,38 @@
     <View
         android:layout_width="wrap_content"
         android:layout_height="1px"
-        android:layout_marginTop="40px"
+        android:layout_marginTop="30px"
         android:background="@color/line" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="86px"
-        android:layout_marginRight="86px"
-        android:layout_marginTop="80px"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="30px"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/cancel_btn"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
-            android:layout_height="35dp"
+            android:layout_height="80px"
             android:layout_weight="1"
             android:background="@drawable/sele_cancel_btn"
             android:text="@string/cancel"
             android:textColor="@color/textBlack"
-            android:textSize="16sp" />
+            android:textSize="26px" />
 
         <Button
             android:id="@+id/ok_btn"
             style="@style/CommonButton"
             android:layout_width="0dp"
-            android:layout_height="35dp"
-            android:layout_marginLeft="84dp"
+            android:layout_height="80px"
+            android:layout_marginLeft="80px"
             android:layout_weight="1"
             android:text="@string/sure"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="26px" />
 
     </LinearLayout>
 </LinearLayout>

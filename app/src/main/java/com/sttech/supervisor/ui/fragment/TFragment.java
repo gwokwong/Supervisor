@@ -37,7 +37,17 @@ public abstract class TFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (rootView == null) {
+//        if (rootView == null) {
+//            rootView = inflater.inflate(provideContentViewId(), container, false);
+//            initView(rootView);
+//        }
+//        return rootView;
+        if (null != rootView) {
+            ViewGroup parent = (ViewGroup) rootView.getParent();
+            if (null != parent) {
+                parent.removeView(rootView);
+            }
+        } else {
             rootView = inflater.inflate(provideContentViewId(), container, false);
             initView(rootView);
         }
@@ -81,7 +91,7 @@ public abstract class TFragment extends Fragment {
      * @param view
      * @param title
      */
-    public void initNatigation(View view, String title) {
+    public void initNavigation(View view, String title) {
         TextView textView = (TextView) view.findViewById(R.id.title);
         if (textView != null && !TextUtils.isEmpty(title)) {
             textView.setText(title);

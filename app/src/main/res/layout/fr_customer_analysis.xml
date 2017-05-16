@@ -3,21 +3,126 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="40px"
+        android:paddingTop="20px">
 
 
-        <TextView
-            android:id="@+id/tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="客户分析"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+        <LinearLayout style="@style/detail_ll">
 
-    </RelativeLayout>
+            <TextView
+                style="@style/detail_small_title"
+                android:text="装修次数" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="yyyyyyyyyyyyyyyyyyyyyyyy" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="设计方面" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="材料方面" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="施工方面" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
+
+        </LinearLayout>
+
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="流程方面" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="公 装 网" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
+
+        </LinearLayout>
+
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="装修公司" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
+
+        </LinearLayout>
+
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="采购标准" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="行业说明" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

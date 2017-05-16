@@ -3,7 +3,7 @@ package com.sttech.supervisor;
 
 public class Constant {
 
-    //    public static final String BASE_URL = "http://news-at.zhihu.com/api/4/";
+//        public static final String BASE_URL = "http://news-at.zhihu.com/api/4/";
     public static final String BASE_URL = "http://120.24.71.109:11000/gz-mobile/";
 
 //    public static final int SUCCESS_CODE = 0;
@@ -13,6 +13,11 @@ public class Constant {
     public static final String EXTRA_PREVIEW_POSITION = "position";
 
     public static final String EXTRA_SELECT_POSITION = "_select_position";
+
+    /**
+     * 项目id
+     */
+    public final static String EXTRA_PROJECT_ID = "projectId";
 
     /**
      * 是否是第一次启动应用

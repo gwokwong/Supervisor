@@ -1,9 +1,7 @@
 package com.sttech.supervisor.ui.fragment;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -25,23 +23,23 @@ import com.baidu.location.Poi;
 import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.MyApp;
 import com.sttech.supervisor.R;
+import com.sttech.supervisor.entity.Project;
+import com.sttech.supervisor.map.LocationService;
 import com.sttech.supervisor.ui.activity.ProjectDetailActivity;
 import com.sttech.supervisor.ui.adapter.AreaAdapter;
 import com.sttech.supervisor.ui.adapter.GirdDropDownAdapter;
 import com.sttech.supervisor.ui.adapter.ProjectListAdapter;
+import com.sttech.supervisor.ui.widget.DropDownMenu;
+import com.sttech.supervisor.ui.widget.SpacesItemDecoration;
 import com.sttech.supervisor.ui.widget.citypicker.adapter.CityListAdapter;
 import com.sttech.supervisor.ui.widget.citypicker.adapter.ResultListAdapter;
 import com.sttech.supervisor.ui.widget.citypicker.db.DBManager;
 import com.sttech.supervisor.ui.widget.citypicker.model.City;
 import com.sttech.supervisor.ui.widget.citypicker.model.LocateState;
 import com.sttech.supervisor.ui.widget.citypicker.view.SideLetterBar;
-import com.sttech.supervisor.entity.Project;
-import com.sttech.supervisor.map.LocationService;
-import com.sttech.supervisor.utils.CommonUtils;
-import com.sttech.supervisor.ui.widget.DropDownMenu;
-import com.sttech.supervisor.ui.widget.SpacesItemDecoration;
 import com.sttech.supervisor.ui.widget.xrecyclerview.RecyclerItemCallback;
 import com.sttech.supervisor.ui.widget.xrecyclerview.XRecyclerView;
+import com.sttech.supervisor.utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,23 +54,6 @@ import java.util.List;
 
 
 public class HomeFragment extends TFragment {
-
-//    private View view;
-//
-//    @Nullable
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        if (null != view) {
-//            ViewGroup parent = (ViewGroup) view.getParent();
-//            if (null != parent) {
-//                parent.removeView(view);
-//            }
-//        } else {
-//            view = inflater.inflate(R.layout.fr_home, null);
-//            initDropDownMenu(view);// 控件初始化
-//        }
-//        return view;
-//    }
 
     @Override
     public int provideContentViewId() {
@@ -120,7 +101,7 @@ public class HomeFragment extends TFragment {
             @Override
             public void onItemClick(int position, Project model, ProjectListAdapter.RecViewHolder holder) {
                 super.onItemClick(position, model, holder);
-                ProjectDetailActivity.start(getActivity());
+                ProjectDetailActivity.start(getActivity(),"123456",true);
 
             }
         });
@@ -129,8 +110,8 @@ public class HomeFragment extends TFragment {
     }
 
     private DropDownMenu mDropDownMenu;
-//    private String headers[] = {"省市", "项目经理", "工作记录", "地域"};
-    private String headers[] = { "项目经理", "工作记录", "地域"};
+    //    private String headers[] = {"省市", "项目经理", "工作记录", "地域"};
+    private String headers[] = {"项目经理", "工作记录", "地域"};
     private List<View> popupViews = new ArrayList<>();
 
     private GirdDropDownAdapter cityAdapter;
@@ -144,28 +125,6 @@ public class HomeFragment extends TFragment {
     private AreaAdapter areaAdapter;
     private int areaPosition = 0;
     private int managerPostion = 0;
-
-
-//    private static final int REQUEST_CODE_PICK_CITY = 0;
-//
-//
-//    //重写onActivityResult方法
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (requestCode == REQUEST_CODE_PICK_CITY && resultCode == RESULT_OK) {
-//            if (data != null) {
-//                String city = data.getStringExtra(CityPickerActivity.KEY_PICKED_CITY);
-////                resultTV.setText("当前选择：" + city);
-//                toastInfo("当前选择：" + city);
-//            }
-//        }
-//    }
-
-//    public void startCityPicker() {
-//        //启动
-//        this.startActivityForResult(new Intent(getActivity(), CityPickerActivity.class),
-//                REQUEST_CODE_PICK_CITY);
-    //    }
 
     private ListView mListView;
     private ListView mResultListView;
@@ -321,7 +280,7 @@ public class HomeFragment extends TFragment {
 
     @Override
     public void initView(View view) {
-        initNatigation(view, "监管项目");
+        initNavigation(view, "监管项目");
         mDropDownMenu = (DropDownMenu) view.findViewById(R.id.dropDownMenu);
 
         //init city view
@@ -412,7 +371,6 @@ public class HomeFragment extends TFragment {
         });
 
         clearBtn = (ImageView) cityView.findViewById(R.id.iv_search_clear);
-//        backBtn = (ImageView) cityView.findViewById(R.id.back);
 
         clearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -423,13 +381,6 @@ public class HomeFragment extends TFragment {
                 mResultListView.setVisibility(View.GONE);
             }
         });
-//        backBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mDropDownMenu.closeMenu();
-//            }
-//        });
-
 
         //init manager menu
         final View managerView = getActivity().getLayoutInflater().inflate(R.layout.ly_drop_area, null);

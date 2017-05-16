@@ -15,10 +15,19 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.Constant;
 import com.sttech.supervisor.R;
+import com.sttech.supervisor.dto.MobileResponse;
+import com.sttech.supervisor.dto.PageDto;
+import com.sttech.supervisor.dto.ProjectAttachDto;
+import com.sttech.supervisor.dto.ProjectDetailDto;
+import com.sttech.supervisor.dto.ProjectPageDto;
+import com.sttech.supervisor.http.HttpManager;
+import com.sttech.supervisor.http.callback.OnResultCallBack;
+import com.sttech.supervisor.http.subscriber.HttpSubscriber;
 import com.sttech.supervisor.ui.adapter.TabPagerAdapter;
 import com.sttech.supervisor.ui.fragment.detail.CustomerAnalysis;
 import com.sttech.supervisor.ui.fragment.detail.CustomerInfo;
@@ -27,6 +36,9 @@ import com.sttech.supervisor.utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * 项目详情界面
@@ -37,16 +49,12 @@ import java.util.List;
 
 public class ProjectDetailActivity extends TActivity {
 
-    public static void start(Context context) {
+    public static void start(Context context, String projectId, boolean isHaveAddBtn) {
         Intent intent = new Intent(context, ProjectDetailActivity.class);
-        context.startActivity(intent);
-    }
-
-
-    //TODO 后续还要新增事件
-    public static void start(Context context, boolean isHaveAddBtn) {
-        Intent intent = new Intent(context, ProjectDetailActivity.class);
-        intent.putExtra(Constant.KEY_HAVE_ADD, isHaveAddBtn);
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.EXTRA_PROJECT_ID, projectId);
+        bundle.putBoolean(Constant.KEY_HAVE_ADD, isHaveAddBtn);
+        intent.putExtras(bundle);
         context.startActivity(intent);
     }
 
@@ -54,7 +62,9 @@ public class ProjectDetailActivity extends TActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_project_detaiil);
+        ButterKnife.bind(this);
         initView();
+        initData();
     }
 
     private String[] mTitles;
@@ -62,6 +72,10 @@ public class ProjectDetailActivity extends TActivity {
     private TabLayout tl;
     private List<Fragment> fragmentList;
     private AppBarLayout appBarLayout;
+    private DecorationInfo decorationInfo;
+    private CustomerInfo customerInfo;
+    private CustomerAnalysis customerAnalysis;
+
 
     private void initView() {
         mTitles = getResources().getStringArray(R.array.project_detail_tab);
@@ -87,9 +101,9 @@ public class ProjectDetailActivity extends TActivity {
         appBarLayout = findById(R.id.app_bar);
 
         fragmentList = new ArrayList<>();
-        fragmentList.add(new DecorationInfo());
-        fragmentList.add(new CustomerInfo());
-        fragmentList.add(new CustomerAnalysis());
+        fragmentList.add(decorationInfo = new DecorationInfo());
+        fragmentList.add(customerInfo = new CustomerInfo());
+        fragmentList.add(customerAnalysis = new CustomerAnalysis());
 
         TabPagerAdapter tabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), mTitles, fragmentList);
         vp.setAdapter(tabPagerAdapter);
@@ -105,9 +119,60 @@ public class ProjectDetailActivity extends TActivity {
     }
 
 
+    @BindView(R.id.detail_project_title)
+    public TextView projectTitle;
+
+    private void initData() {
+        String projectId = getIntent().getStringExtra(Constant.EXTRA_PROJECT_ID);
+        HttpSubscriber httpSubscriber = new HttpSubscriber(new OnResultCallBack<ProjectPageDto>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(ProjectPageDto projectPageDto) {
+//                ProjectDetailDto detailDto = projectPageDto.getDetailDto();
+//                ProjectDetailDto detailDto = new ProjectDetailDto();
+//                detailDto.setTitle("写字楼装潢");
+//                detailDto.setCreateTime("5月16日 15:00:00");
+//                detailDto.setCustomerManagerName("赵春来");
+//                ((TextView) findById(R.id.detail_project_title)).setText(detailDto.getTitle());
+//                ((TextView) findById(R.id.detail_project_time)).setText(detailDto.getCreateTime());
+//                ((TextView) findById(R.id.detail_project_manager)).setText(detailDto.getCustomerManagerName());
+//                PageDto<ProjectAttachDto> attachList = projectPageDto.getAttachList();
+            }
+
+
+            @Override
+            public void onError(int code, String errorMsg) {
+
+            }
+
+            @Override
+            public void onCompleted() {
+
+                //TODO TEST
+                ProjectDetailDto detailDto = new ProjectDetailDto();
+                detailDto.setTitle("写字楼装潢");
+                detailDto.setCreateTime("5月16日 15:00:00");
+                detailDto.setCustomerManagerName("赵春来");
+                projectTitle.setText(detailDto.getTitle());
+//                ((TextView) findById(R.id.detail_project_title)).setText(detailDto.getTitle());
+                ((TextView) findById(R.id.detail_project_time)).setText(detailDto.getCreateTime());
+                ((TextView) findById(R.id.detail_project_manager)).setText(detailDto.getCustomerManagerName());
+
+            }
+        });
+        HttpManager.getInstance().getProjectDetail(httpSubscriber, projectId);
+
+    }
+
+
     /**
      * 添加资料
      */
+
     private void addProfile() {
         initPopupWindow();
 

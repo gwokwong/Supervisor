@@ -160,7 +160,7 @@ public class TakePhotoActivity extends TActivity {
     }
 
     /**
-     * 获取内存权限回调
+     * 获取权限回调
      */
     @TargetApi(23)
     @Override

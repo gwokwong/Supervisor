@@ -3,21 +3,114 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="40px"
+        android:paddingTop="20px">
 
 
-        <TextView
-            android:id="@+id/tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="客户信息"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+        <LinearLayout style="@style/detail_ll">
 
-    </RelativeLayout>
+            <TextView
+                style="@style/detail_small_title"
+                android:text="公司名称" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="yyyyyyyyyyyyyyyyyyyyyyyy" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="注册资金" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="公司法人" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="经营期限" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
+
+        </LinearLayout>
+
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="股东结构" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="经营范围" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
+
+        </LinearLayout>
+
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="企业阶段" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
+
+        </LinearLayout>
+
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="企业员工" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

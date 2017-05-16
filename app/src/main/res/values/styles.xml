@@ -145,5 +145,31 @@
         <item name="android:background">@drawable/sele_common_btn</item>
     </style>
 
+    <style name="detail_small_title">
+        <item name="android:layout_width">120px</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/small_title</item>
+        <item name="android:textSize">26px</item>
+    </style>
+
+    <style name="detail_small_body">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0px</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/small_body</item>
+        <item name="android:textSize">26px</item>
+        <item name="android:layout_marginLeft">50px</item>
+    </style>
+
+    <style name="detail_ll">
+        <item name="android:layout_marginLeft">30px</item>
+        <item name="android:layout_marginRight">30px</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_marginTop">25px</item>
+
+    </style>
+
 
 </resources>

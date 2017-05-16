@@ -118,7 +118,7 @@ public class EndFragment extends TFragment {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position) {
                 toastInfo(position + "");
-                ProjectDetailActivity.start(getActivity(), false);
+                ProjectDetailActivity.start(getActivity(),"123456", false);
             }
         });
     }

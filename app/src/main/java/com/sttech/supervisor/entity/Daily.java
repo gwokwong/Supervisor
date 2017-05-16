@@ -3,10 +3,12 @@ package com.sttech.supervisor.entity;
 
 import java.util.List;
 
+//import com.sttech.supervisor.BR;
+
 /**
  * Created by Eric on 15/6/6.
  */
-public class Daily {
+public class Daily  {
 
     private int id;
 
@@ -16,12 +18,15 @@ public class Daily {
 
     private List<Story> top_stories;
 
+//    @Bindable
     public int getDate() {
         return date;
     }
 
     public void setDate(int date) {
         this.date = date;
+//        notifyPropertyChanged(BR.date);
+//        notifyPropertyChanged(BR.date);
     }
 
     public List<Story> getStories() {

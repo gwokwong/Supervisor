@@ -3,21 +3,161 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="40px"
+        android:paddingTop="20px">
 
 
-        <TextView
-            android:id="@+id/tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="装修信息"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+        <LinearLayout style="@style/detail_ll">
 
-    </RelativeLayout>
+            <TextView
+                style="@style/detail_small_title"
+                android:text="项目地址" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="广东省广州市越秀区东风西路197号国际金融大厦" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="装修类型" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXX" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="装修档次" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXX" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="楼盘属性" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXX" />
+
+        </LinearLayout>
+
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="施工面积" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXX" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="项目需求" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXX" />
+
+        </LinearLayout>
+
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="装修预算" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXX" />
+
+        </LinearLayout>
+
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="项目周期" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXX" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="性 价 比" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXX" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="风格要求" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXX" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="设计要求" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXX" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="环保要求" />
+
+            <TextView
+                style="@style/detail_small_body"
+                android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXX" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

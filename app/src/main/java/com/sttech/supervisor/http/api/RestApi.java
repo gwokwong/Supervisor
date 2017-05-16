@@ -3,15 +3,20 @@ package com.sttech.supervisor.http.api;
 
 import com.sttech.supervisor.dto.MessageDto;
 import com.sttech.supervisor.dto.MobileResponse;
+import com.sttech.supervisor.dto.ProjectPageDto;
+import com.sttech.supervisor.entity.Daily;
 
 import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
-
+/**
+ * 请求接口配置
+ */
 public interface RestApi {
 
     /**
@@ -43,12 +48,28 @@ public interface RestApi {
     Observable<MobileResponse<List<MessageDto>>> getMessage();
 
 
+    /**
+     * 项目详情
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("data/projectDetail")
+    Observable<MobileResponse<ProjectPageDto>> projectDetail(@Field("projectId") String projectId);
+
+
 //    @FormUrlEncoded
 //    @POST("query?key=7c2d1da3b8634a2b9fe8848c3a9edcba")
 //    Observable<ApiResponse<TestBean>> getDatas(@Field("pno") int pno, @Field("ps") int ps, @Field("dtype") String dtype);
 //
 //    @GET("news/latest")
-//    Observable<Daily> getDaily();
+//
+
+    @FormUrlEncoded
+    @POST("data/projectDetail")
+    Observable<MobileResponse<ProjectPageDto>> getProjectList();
+
+
 //
 //    @POST("{url}")
 //    Observable<Daily> executePost(

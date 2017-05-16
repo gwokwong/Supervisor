@@ -46,4 +46,7 @@
     <color name="top_bar_line">#e0e0e0</color>
     <color name="loading_txt">#60000000</color>
 
+    <color name="small_title">#212121</color>
+    <color name="small_body">#7c7a7a</color>
+
 </resources>
