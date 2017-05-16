@@ -5,11 +5,10 @@ import android.util.Log;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.sttech.supervisor.Constant;
+import com.sttech.supervisor.dto.MobileResponse;
 import com.sttech.supervisor.http.api.RestApi;
 import com.sttech.supervisor.http.cache.CacheProvider;
 import com.sttech.supervisor.http.cookies.NovateCookieManger;
-import com.sttech.supervisor.http.entity.MobileLoginResultDto;
-import com.sttech.supervisor.http.entity.MobileResponse;
 import com.sttech.supervisor.http.exception.ApiException;
 
 import java.util.concurrent.TimeUnit;
@@ -50,12 +49,13 @@ public class HttpManager {
         //拦截请求和响应日志并输出，其实有很多封装好的日志拦截插件，大家也可以根据个人喜好选择。
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-                .retryOnConnectionFailure(true)
+//                .retryOnConnectionFailure(false)
                 .addInterceptor(loggingInterceptor)
                 .cookieJar(new NovateCookieManger(mContext))
-                .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+//                .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-                .connectionPool(new ConnectionPool(8, 15, TimeUnit.SECONDS))
+//        .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+//                .connectionPool(new ConnectionPool(8, 15, TimeUnit.SECONDS))
         ;
 
         OkHttpClient okHttpClient = builder.build();

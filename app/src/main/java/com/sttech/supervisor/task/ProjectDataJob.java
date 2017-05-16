@@ -25,13 +25,13 @@ public class ProjectDataJob extends Job {
 
     @Override
     public void onAdded() {
-        Logger.d("ProjectDataJob->onAdded");
+//        Logger.d("ProjectDataJob->onAdded");
     }
 
 
     @Override
     public void onRun() throws Throwable {
-        Logger.d("执行ProjectDataJobonRun");
+//        Logger.d("执行ProjectDataJobonRun");
         //查询本地数据库,将所有上传没有成功的项目资料都再次上传，策略，按时间排序先上传最新未上传成功的资料，再寻找以前的资料
         //每次最多启动5个请求。
 

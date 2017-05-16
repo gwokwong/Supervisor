@@ -11,11 +11,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.sttech.supervisor.R;
+import com.sttech.supervisor.dto.MessageDto;
 import com.sttech.supervisor.ui.adapter.BaseRecyclerAdapter;
 import com.sttech.supervisor.ui.adapter.BaseRecyclerHolder;
-import com.sttech.supervisor.entity.NoticeMsg;
-import com.sttech.supervisor.utils.CommonUtils;
 import com.sttech.supervisor.ui.widget.AdvanceDecoration;
+import com.sttech.supervisor.utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,13 +43,13 @@ public class MyMsgActivity extends TActivity {
         initView();
     }
 
-    private List<NoticeMsg> noticeMsgList;
+    private List<MessageDto> messageDtoList;
     private BaseRecyclerAdapter noticeListAdapter;
 
     private void initData() {
-        noticeMsgList = new ArrayList<>();
+        messageDtoList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            noticeMsgList.add(new NoticeMsg("项目信息", "4月20日", "18:00:00", "你已被指派为xxx项目的助理，请切实做好质量检测监督工作"));
+            messageDtoList.add(new MessageDto("项目信息", "4月20日18:00:00", "你已被指派为xxx项目的助理，请切实做好质量检测监督工作"));
         }
     }
 
@@ -60,14 +60,13 @@ public class MyMsgActivity extends TActivity {
     private void initView() {
         initNavigation(getString(R.string.my_message));
         appBarLayout = findById(R.id.app_bar);
-        noticeListAdapter = new BaseRecyclerAdapter<NoticeMsg>(this, noticeMsgList, R.layout.item_my_msg) {
+        noticeListAdapter = new BaseRecyclerAdapter<MessageDto>(this, messageDtoList, R.layout.item_my_msg) {
 
             @Override
-            public void convert(BaseRecyclerHolder holder, NoticeMsg item, int position, boolean isScrolling) {
-                holder.setText(R.id.type, item.getType());
-                holder.setText(R.id.date, item.getDate());
-                holder.setText(R.id.time, item.getTime());
-                holder.setText(R.id.body, item.getBody());
+            public void convert(BaseRecyclerHolder holder, MessageDto item, int position, boolean isScrolling) {
+                holder.setText(R.id.title, item.getTitle());
+                holder.setText(R.id.time, item.getCreateTime());
+                holder.setText(R.id.content, item.getContent());
             }
         };
         recyclerView = findById(R.id.msg_rv);
@@ -82,8 +81,6 @@ public class MyMsgActivity extends TActivity {
             }
         });
         recyclerView.addItemDecoration(new AdvanceDecoration(this, OrientationHelper.VERTICAL, CommonUtils.dip2px(this, 8)));
-
-
     }
 
 

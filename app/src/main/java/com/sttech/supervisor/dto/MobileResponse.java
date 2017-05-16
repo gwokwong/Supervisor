@@ -1,4 +1,4 @@
-package com.sttech.supervisor.http.entity;
+package com.sttech.supervisor.dto;
 
 public class MobileResponse<T> {
 
@@ -41,12 +41,4 @@ public class MobileResponse<T> {
         this.data = data;
     }
 
-    @Override
-    public String toString() {
-        return "MobileResponse{" +
-                "code=" + code +
-                ", message='" + message + '\'' +
-                ", data=" + data +
-                '}';
-    }
 }

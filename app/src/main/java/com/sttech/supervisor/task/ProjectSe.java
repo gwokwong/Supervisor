@@ -25,7 +25,7 @@ public class ProjectSe extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Logger.d("ProjectSe");
+//        Logger.d("ProjectSe");
         MyApp.getInstance().getJobManager().addJobInBackground(new ProjectDataJob());
         TaskManager.getInstance().setProjectAlarm();
         return super.onStartCommand(intent, flags, startId);

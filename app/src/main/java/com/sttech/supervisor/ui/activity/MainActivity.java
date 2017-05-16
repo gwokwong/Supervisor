@@ -76,7 +76,7 @@ public class MainActivity extends TActivity {
     private void test() {
 
         boolean isLogin = (boolean) SpUtils.get(Constant.SP_KEY_IS_LOGIN, false);
-        Logger.d("isLogin->" + isLogin);
+//        Logger.d("isLogin->" + isLogin);
 
         HttpSubscriber httpSubscriber = new HttpSubscriber(new OnResultCallBack<String>() {
 

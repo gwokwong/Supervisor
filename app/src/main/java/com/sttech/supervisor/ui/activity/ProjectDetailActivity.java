@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
+import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.Constant;
 import com.sttech.supervisor.R;
 import com.sttech.supervisor.ui.adapter.TabPagerAdapter;
@@ -65,7 +66,7 @@ public class ProjectDetailActivity extends TActivity {
     private void initView() {
         mTitles = getResources().getStringArray(R.array.project_detail_tab);
         boolean isHaveAddBtn = getIntent().getBooleanExtra(Constant.KEY_HAVE_ADD, false);
-        if (!isHaveAddBtn) {
+        if (isHaveAddBtn) {
             initNavigation(getString(R.string.project_detail), null, null, 0, R.drawable.sele_add_btn, new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

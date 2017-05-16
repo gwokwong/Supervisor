@@ -28,7 +28,6 @@ public class StartActivity extends TActivity {
     private void initData() {
         boolean isFirst = (boolean) SpUtils.get(Constant.SP_KEY_IS_FIRST, true);
         boolean isLogin = (boolean) SpUtils.get(Constant.SP_KEY_IS_LOGIN, false);
-        Logger.d("isLogin->"+isLogin);
         if (isFirst &&!isLogin) {
             SignInActivity.start(this);
             finish();

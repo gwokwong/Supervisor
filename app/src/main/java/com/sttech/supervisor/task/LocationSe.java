@@ -26,7 +26,7 @@ public class LocationSe extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Logger.d("启动LocationService");
+//        Logger.d("启动LocationService");
         MyApp.getInstance().getJobManager().addJobInBackground(new LocationJob());
         TaskManager.getInstance().setLocationAlarm();
         return super.onStartCommand(intent, flags, startId);

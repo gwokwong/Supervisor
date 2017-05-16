@@ -19,7 +19,6 @@ import com.sttech.supervisor.R;
 import com.sttech.supervisor.db.LocationInfo;
 import com.sttech.supervisor.http.HttpManager;
 import com.sttech.supervisor.http.callback.OnResultCallBack;
-import com.sttech.supervisor.http.entity.MobileLoginResultDto;
 import com.sttech.supervisor.http.subscriber.HttpSubscriber;
 import com.sttech.supervisor.ui.fragment.dialog.DialogFragmentHelper;
 import com.sttech.supervisor.utils.Base64Utils;
@@ -33,8 +32,6 @@ import java.util.ArrayList;
  * Created by 韦国旺 on 2017/5/2.
  * Copyright (c) 2017 All Rights Reserved.
  */
-
-
 public class SignInActivity extends TActivity {
 
     public static void start(Context context) {
@@ -143,7 +140,7 @@ public class SignInActivity extends TActivity {
 
             @Override
             public void onStart() {
-                Logger.d("onStart");
+//                Logger.d("onStart");
                 mDialogFragment = DialogFragmentHelper.showProgress(getSupportFragmentManager(), "正在登录中...");
             }
 
@@ -151,16 +148,10 @@ public class SignInActivity extends TActivity {
             public void onSuccess(String data) {
                 Logger.d("onSuccess" + data);
                 toast(data);
-
                 //设计唯一的记录用户已登录
                 SpUtils.put(Constant.SP_KEY_IS_FIRST, false);
 //                MyApp.getInstance().setLogin(true);
-
                 SpUtils.put(Constant.SP_KEY_IS_LOGIN, true);
-
-
-
-
                 MainActivity.start(SignInActivity.this);
                 finish();
             }
@@ -169,12 +160,13 @@ public class SignInActivity extends TActivity {
             public void onError(int code, String errorMsg) {
                 Logger.d("onError" + errorMsg);
                 toaste(errorMsg);
+                MainActivity.start(SignInActivity.this);
 
             }
 
             @Override
             public void onCompleted() {
-                Logger.d("onCompleted");
+//                Logger.d("onCompleted");
                 mDialogFragment.dismiss();
             }
         });

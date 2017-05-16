@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 import com.raizlabs.android.dbflow.sql.language.Select;
 import com.sttech.supervisor.R;
 import com.sttech.supervisor.db.LocationInfo;
+import com.sttech.supervisor.entity.NoticeMsg;
 import com.sttech.supervisor.ui.adapter.BaseRecyclerAdapter;
 import com.sttech.supervisor.ui.adapter.BaseRecyclerHolder;
-import com.sttech.supervisor.entity.NoticeMsg;
 import com.sttech.supervisor.ui.fragment.TFragment;
 import com.sttech.supervisor.ui.widget.AdvanceDecoration;
 import com.sttech.supervisor.utils.DateUtils;
@@ -30,7 +30,6 @@ import java.util.List;
  */
 
 public class LocalFragment extends TFragment {
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,7 +59,7 @@ public class LocalFragment extends TFragment {
         for (int i = 0; i < locationInfos.size(); i++) {
             noticeMsgList.add(new NoticeMsg("发送失败",
                     DateUtils.getFormatDateTime(new Date(locationInfos.get(i).time), "MM月dd日"),
-                    DateUtils.getFormatDateTime(new Date(locationInfos.get(i).time), "HH:mm:ss"),
+                    DateUtils.getFormatDateTime(new Date(locationInfos.get(i).time), "MM月dd日 HH:mm:ss"),
                     "位置信息发送失败"));
         }
 
@@ -71,14 +70,13 @@ public class LocalFragment extends TFragment {
     private RecyclerView recyclerView;
 
     private void initView(View view) {
-        noticeListAdapter = new BaseRecyclerAdapter<NoticeMsg>(getActivity(), noticeMsgList, R.layout.item_my_msg) {
+        noticeListAdapter = new BaseRecyclerAdapter<NoticeMsg>(getActivity(), noticeMsgList, R.layout.item_location_fail) {
 
             @Override
             public void convert(BaseRecyclerHolder holder, NoticeMsg item, int position, boolean isScrolling) {
-                holder.setText(R.id.type, item.getType());
-                holder.setText(R.id.date, item.getDate());
+                holder.setText(R.id.title, item.getType());
                 holder.setText(R.id.time, item.getTime());
-                holder.setText(R.id.body, item.getBody());
+                holder.setText(R.id.content, item.getBody());
             }
         };
         recyclerView = (RecyclerView) view.findViewById(R.id.common_rv);

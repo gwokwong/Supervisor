@@ -1,34 +1,46 @@
 package com.sttech.supervisor.http.api;
 
 
-import com.sttech.supervisor.entity.Daily;
-import com.sttech.supervisor.http.entity.MobileLoginResultDto;
-import com.sttech.supervisor.http.entity.MobileResponse;
+import com.sttech.supervisor.dto.MessageDto;
+import com.sttech.supervisor.dto.MobileResponse;
 
-import java.util.Map;
+import java.util.List;
 
 import io.reactivex.Observable;
-import okhttp3.RequestBody;
 import retrofit2.http.Field;
-import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
-import retrofit2.http.PartMap;
-import retrofit2.http.Path;
-import retrofit2.http.QueryMap;
 
 
 public interface RestApi {
 
+    /**
+     * 登录
+     *
+     * @param account
+     * @param password
+     * @return
+     */
     @FormUrlEncoded
     @POST("login")
     Observable<MobileResponse<String>> login(@Field("accountText") String account, @Field("password") String password);
 
+    /**
+     * 省市区信息
+     *
+     * @return
+     */
     @POST("data/location")
     Observable<MobileResponse<String>> getLocation();
+
+
+    /**
+     * 我的消息
+     *
+     * @return
+     */
+    @POST("data/message")
+    Observable<MobileResponse<List<MessageDto>>> getMessage();
 
 
 //    @FormUrlEncoded

@@ -38,7 +38,7 @@ public class LocationJob extends Job {
 
     @Override
     public void onAdded() {
-        Logger.d("LocationJob->onAdded");
+//        Logger.d("LocationJob->onAdded");
     }
 
     private static int TRY_TIMES = 0;
@@ -51,12 +51,12 @@ public class LocationJob extends Job {
 
     @Override
     public void onRun() throws Throwable {
-        Logger.d("执行LocationJobonRun");
+//        Logger.d("执行LocationJobonRun");
         locationService = ((MyApp) MyApp.getmContext()).locationService;
         mListener = new BDLocationListener() {
             @Override
             public void onReceiveLocation(final BDLocation location) {
-                Logger.d("onReceiveLocation22");
+//                Logger.d("onReceiveLocation22");
                 if (null != location && location.getLocType() != BDLocation.TypeServerError) {
                     location.getCity();
                     location.getLatitude();
@@ -67,7 +67,7 @@ public class LocationJob extends Job {
                     sb.append(location.getLongitude());
                     sb.append("\ncity : ");// 城市
                     sb.append(location.getCity());
-                    Logger.d("LocationJob定位成功" + sb);
+//                    Logger.d("LocationJob定位成功" + sb);
 
                     LocationInfo locationInfo = new LocationInfo();
                     locationInfo.latitude = location.getLatitude();

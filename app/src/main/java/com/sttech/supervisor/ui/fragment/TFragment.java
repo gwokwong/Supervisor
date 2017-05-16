@@ -36,12 +36,12 @@ public class TFragment extends Fragment {
 // TODO Auto-generated method stub
 
         super.setUserVisibleHint(isVisibleToUser);
-        Logger.d("isVisibleToUser");
+//        Logger.d("isVisibleToUser");
 
 
         if (isVisibleToUser) {
 
-            Logger.d("isVisibleToUser");
+//            Logger.d("isVisibleToUser");
             isVisible = true;
 
             onVisible();

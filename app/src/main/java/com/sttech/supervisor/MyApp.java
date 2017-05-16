@@ -38,17 +38,15 @@ public class MyApp extends Application {
         Logger.init(TAG);
         HttpManager.init(this);
         //异常记录日志
-//        AppCrash.getInstance().init(this);
+        AppCrash.getInstance().init(this);
         //初始化定位sdk，建议在Application中创建
         locationService = new LocationService(getApplicationContext());
         mVibrator = (Vibrator) getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
 
         instance = this;
         getJobManager();
-
         TaskManager.getInstance().init(this);
-//        TaskManager.getInstance().setAlarm();
-        Logger.d("Const.isUseService->" + Const.isUseService);
+
         FlowManager.init(getApplicationContext());  //db init
         if (Const.isUseService) {
             Intent intent = new Intent(this, LocationSe.class);

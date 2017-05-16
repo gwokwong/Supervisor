@@ -1,4 +1,4 @@
-package com.sttech.supervisor.ui.fragment.endproject;
+package com.sttech.supervisor.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,24 +9,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.R;
+import com.sttech.supervisor.dto.ProjectListDto;
 import com.sttech.supervisor.ui.activity.ProjectDetailActivity;
 import com.sttech.supervisor.ui.adapter.BaseRecyclerAdapter;
 import com.sttech.supervisor.ui.adapter.BaseRecyclerHolder;
-import com.sttech.supervisor.entity.Project;
-import com.sttech.supervisor.ui.fragment.TFragment;
 import com.sttech.supervisor.ui.widget.AdvanceDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * function :
+ * function : 已结束项目列表
  * Created by 韦国旺 on 2017/4/29.
  * Copyright (c) 2017 All Rights Reserved.
  */
 
-public class GrabSingleEndFragment extends TFragment {
+public class EndFragment extends TFragment {
 
 
     @Override
@@ -38,39 +38,52 @@ public class GrabSingleEndFragment extends TFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fr_grabsingle_end, container, false);
-        initData();
+//        initData();
         initView(view);
         return view;
     }
 
-    private List<Project> projectList;
+    private List<ProjectListDto> projectList = new ArrayList<>();
     private BaseRecyclerAdapter projectListAdapter;
     private RecyclerView recyclerView;
-    private static int position = 0;
+//    private static int position = 0;
 
-    private void initData() {
-        projectList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            projectList.add(new Project("高档写字楼装修" + (++position), "12", "办公室", "韦先生", "广东省深圳市宝安区坂田大道"));
+    public void setProjectList(List<ProjectListDto> list) {
+        Logger.d("list.size()->" + list.size());
+        if (list == null) {
+            Logger.d("return" + (list == null) + (projectListAdapter == null));
+            return;
+        } else {
+            if (projectList != null && projectList.size() > 0) {
+                projectList.clear();
+            }
+            projectList = list;
+            Logger.d("setAdapter");
+            setAdapter();
         }
     }
 
+
     private void initView(View view) {
-        projectListAdapter = new BaseRecyclerAdapter<Project>(getActivity(), projectList, R.layout.item_end_project) {
-
-            @Override
-            public void convert(BaseRecyclerHolder holder, Project item, int position, boolean isScrolling) {
-                holder.setText(R.id.project_title, item.getTitle());
-                holder.setText(R.id.project_address, item.getAddress());
-                holder.setText(R.id.project_type, item.getType());
-                holder.setText(R.id.project_status, "抢单结束");
-            }
-        };
-
         recyclerView = (RecyclerView) view.findViewById(R.id.grabsingle_end_rv);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.addItemDecoration(new AdvanceDecoration(getActivity(), OrientationHelper.VERTICAL, dip2px(8)));
+    }
+
+
+    private void setAdapter() {
+        projectListAdapter = new BaseRecyclerAdapter<ProjectListDto>(getActivity(), projectList, R.layout.item_end_project) {
+
+            @Override
+            public void convert(BaseRecyclerHolder holder, ProjectListDto item, int position, boolean isScrolling) {
+                holder.setText(R.id.project_title, item.getTitle());
+                holder.setText(R.id.project_address, item.getFullProjectAddress());
+                holder.setText(R.id.project_type, item.getDecorationCategoryLabel());
+                holder.setText(R.id.project_status, item.getStatusLabel());
+            }
+        };
         recyclerView.setAdapter(projectListAdapter);
         projectListAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
             @Override
@@ -79,9 +92,5 @@ public class GrabSingleEndFragment extends TFragment {
                 ProjectDetailActivity.start(getActivity(), false);
             }
         });
-        recyclerView.addItemDecoration(new AdvanceDecoration(getActivity(), OrientationHelper.VERTICAL, dip2px(8)));
     }
-
-
-
 }
