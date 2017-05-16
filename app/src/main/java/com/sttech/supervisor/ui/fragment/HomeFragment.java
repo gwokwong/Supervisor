@@ -129,7 +129,8 @@ public class HomeFragment extends TFragment {
     }
 
     private DropDownMenu mDropDownMenu;
-    private String headers[] = {"省市", "项目经理", "工作记录", "地域"};
+//    private String headers[] = {"省市", "项目经理", "工作记录", "地域"};
+    private String headers[] = { "项目经理", "工作记录", "地域"};
     private List<View> popupViews = new ArrayList<>();
 
     private GirdDropDownAdapter cityAdapter;
@@ -323,25 +324,7 @@ public class HomeFragment extends TFragment {
         initNatigation(view, "监管项目");
         mDropDownMenu = (DropDownMenu) view.findViewById(R.id.dropDownMenu);
 
-
-        //init city menu
-//        final ListView cityView = new ListView(getActivity());
-//        cityAdapter = new GirdDropDownAdapter(getActivity(), Arrays.asList(citys));
-//        cityView.setDividerHeight(0);
-//        cityView.setAdapter(cityAdapter);
-//        cityView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                cityAdapter.setCheckItem(position);
-//                mDropDownMenu.setTabText(position == 0 ? headers[0] : citys[position]);
-////                mDropDownMenu.closeMenu();
-//                startCityPicker();
-//
-//
-//            }
-//        });
-
-
+        //init city view
         final View cityView = getActivity().getLayoutInflater().inflate(R.layout.ly_city_view, null);
         dbManager = new DBManager(getActivity());
         dbManager.copyDBFile();
@@ -457,7 +440,7 @@ public class HomeFragment extends TFragment {
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDropDownMenu.setTabText(managerPostion == 0 ? headers[1] : managers[managerPostion]);
+                mDropDownMenu.setTabText(managerPostion == 0 ? headers[0] : managers[managerPostion]);
                 mDropDownMenu.closeMenu();
             }
         });
@@ -480,7 +463,7 @@ public class HomeFragment extends TFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 workRecordAdapter.setCheckItem(position);
-                mDropDownMenu.setTabText(position == 0 ? headers[2] : workRecords[position]);
+                mDropDownMenu.setTabText(position == 0 ? headers[1] : workRecords[position]);
                 mDropDownMenu.closeMenu();
             }
         });
@@ -495,7 +478,7 @@ public class HomeFragment extends TFragment {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDropDownMenu.setTabText(areaPosition == 0 ? headers[3] : areas[areaPosition]);
+                mDropDownMenu.setTabText(areaPosition == 0 ? headers[2] : areas[areaPosition]);
                 mDropDownMenu.closeMenu();
             }
         });
@@ -508,7 +491,7 @@ public class HomeFragment extends TFragment {
         });
 
         //init popupViews
-        popupViews.add(cityView);
+//        popupViews.add(cityView);
         popupViews.add(managerView);
         popupViews.add(workRecordView);
         popupViews.add(areaView);
