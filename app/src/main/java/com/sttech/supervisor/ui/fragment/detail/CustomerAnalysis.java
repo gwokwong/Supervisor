@@ -18,11 +18,21 @@ import com.sttech.supervisor.ui.fragment.TFragment;
 
 public class CustomerAnalysis extends TFragment {
 
-    @Nullable
+//    @Nullable
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//        View view = inflater.inflate(R.layout.fr_customer_analysis, container, false);
+//        return view;
+//    }
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fr_customer_analysis, container, false);
-        return view;
+    public int provideContentViewId() {
+        return R.layout.fr_customer_analysis;
+    }
+
+    @Override
+    public void initView(View rootView) {
+
     }
 
 }

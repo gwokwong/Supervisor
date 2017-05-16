@@ -8,14 +8,13 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.MotionEvent;
 import android.view.View;
 
 import com.sttech.supervisor.Constant;
 import com.sttech.supervisor.R;
 import com.sttech.supervisor.ui.adapter.TabPagerAdapter;
-import com.sttech.supervisor.ui.fragment.sendfail.LocalFragment;
-import com.sttech.supervisor.ui.fragment.sendfail.WorkRecordFragment;
+import com.sttech.supervisor.ui.fragment.LocalFragment;
+import com.sttech.supervisor.ui.fragment.WorkRecordFragment;
 import com.sttech.supervisor.utils.CommonUtils;
 
 import java.util.ArrayList;

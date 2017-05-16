@@ -28,6 +28,7 @@ import java.util.List;
 
 public class EndFragment extends TFragment {
 
+    private View view;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,10 +38,28 @@ public class EndFragment extends TFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fr_grabsingle_end, container, false);
-//        initData();
-        initView(view);
+
+        if (null != view) {
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if (null != parent) {
+                parent.removeView(view);
+            }
+        } else {
+            view = inflater.inflate(R.layout.fr_grabsingle_end, null);
+            initView(view);// 控件初始化
+        }
         return view;
+
+
+//        View view = inflater.inflate(R.layout.fr_grabsingle_end, container, false);
+////        initData();
+//        initView(view);
+//        return view;
+    }
+
+    @Override
+    public int provideContentViewId() {
+        return R.layout.fr_grabsingle_end;
     }
 
     private List<ProjectListDto> projectList = new ArrayList<>();
@@ -60,17 +79,27 @@ public class EndFragment extends TFragment {
             projectList = list;
             Logger.d("setAdapter");
             setAdapter();
+//            projectListAdapter.notifyDataSetChanged();
         }
     }
 
-
-    private void initView(View view) {
+    @Override
+    public void initView(View rootView) {
         recyclerView = (RecyclerView) view.findViewById(R.id.grabsingle_end_rv);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(new AdvanceDecoration(getActivity(), OrientationHelper.VERTICAL, dip2px(8)));
     }
+
+    //    public void initView(View view) {
+//        recyclerView = (RecyclerView) view.findViewById(R.id.grabsingle_end_rv);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+//        linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
+//        recyclerView.setLayoutManager(linearLayoutManager);
+//        recyclerView.addItemDecoration(new AdvanceDecoration(getActivity(), OrientationHelper.VERTICAL, dip2px(8)));
+////        setAdapter();
+//    }
 
 
     private void setAdapter() {

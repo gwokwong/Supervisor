@@ -57,28 +57,34 @@ import java.util.List;
 
 public class HomeFragment extends TFragment {
 
-    private View view;
+//    private View view;
+//
+//    @Nullable
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        if (null != view) {
+//            ViewGroup parent = (ViewGroup) view.getParent();
+//            if (null != parent) {
+//                parent.removeView(view);
+//            }
+//        } else {
+//            view = inflater.inflate(R.layout.fr_home, null);
+//            initDropDownMenu(view);// 控件初始化
+//        }
+//        return view;
+//    }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (null != view) {
-            ViewGroup parent = (ViewGroup) view.getParent();
-            if (null != parent) {
-                parent.removeView(view);
-            }
-        } else {
-            view = inflater.inflate(R.layout.fr_home, null);
-            initDropDownMenu(view);// 控件初始化
-        }
-        return view;
+    public int provideContentViewId() {
+        return R.layout.fr_home;
     }
 
     private XRecyclerView xRecyclerView;
     private ProjectListAdapter projectListAdapter;
     private static int position = 0;
 
-    private void initView(View view) {
+
+    public void initPopupViews(View view) {
 
         xRecyclerView = (XRecyclerView) view.findViewById(R.id.recyclerview);
         projectListAdapter = new ProjectListAdapter(getActivity());
@@ -312,8 +318,9 @@ public class HomeFragment extends TFragment {
         locationService.start();
     }
 
-    private void initDropDownMenu(View view) {
-        initNatigation(view, "监管");
+    @Override
+    public void initView(View view) {
+        initNatigation(view, "监管项目");
         mDropDownMenu = (DropDownMenu) view.findViewById(R.id.dropDownMenu);
 
 
@@ -508,7 +515,7 @@ public class HomeFragment extends TFragment {
 
         //init body view
         View contentView = LayoutInflater.from(getActivity()).inflate(R.layout.ly_fr_home_body, null);
-        initView(contentView);
+        initPopupViews(contentView);
         //init dropdownview
         mDropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, contentView);
 

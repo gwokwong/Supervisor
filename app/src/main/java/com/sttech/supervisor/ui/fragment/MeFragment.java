@@ -28,23 +28,23 @@ import com.sttech.supervisor.ui.activity.SignInActivity;
 
 public class MeFragment extends TFragment implements View.OnClickListener {
 
-    @Override
-    protected void lazyLoad() {
-        super.lazyLoad();
-        Logger.d("重新加载数据");
-    }
+//
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//    }
+//
+//    @Nullable
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        View view = inflater.inflate(R.layout.fr_me, container, false);
+//        initView(view);
+//        return view;
+//    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fr_me, container, false);
-        initView(view);
-        return view;
+    public int provideContentViewId() {
+        return R.layout.fr_me;
     }
 
     /**
@@ -72,7 +72,8 @@ public class MeFragment extends TFragment implements View.OnClickListener {
     private LinearLayout msgll, endProjectll, sendErrorll;
     private TextView msgCountTv, sendFailCountTv;
 
-    private void initView(View view) {
+    @Override
+    public void initView(View view) {
         headImg = (RoundedImageView) view.findViewById(R.id.me_head);
         nameTv = (TextView) view.findViewById(R.id.me_name);
         jobTv = (TextView) view.findViewById(R.id.me_job);

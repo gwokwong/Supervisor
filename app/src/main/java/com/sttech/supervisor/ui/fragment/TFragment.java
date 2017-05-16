@@ -1,12 +1,15 @@
 package com.sttech.supervisor.ui.fragment;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.R;
 import com.sttech.supervisor.utils.CommonUtils;
 
@@ -19,70 +22,55 @@ import es.dmoral.toasty.Toasty;
  */
 
 
-public class TFragment extends Fragment {
+public abstract class TFragment extends Fragment {
 
 
-    /**
-     * Fragment当前状态是否可见
-     */
+    View rootView;
 
-    protected boolean isVisible;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
+    }
+
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (rootView == null) {
+            rootView = inflater.inflate(provideContentViewId(), container, false);
+            initView(rootView);
+        }
+        return rootView;
+    }
 
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initData();
+        initListener();
+    }
 
-    public void setUserVisibleHint(boolean isVisibleToUser) {
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 
-// TODO Auto-generated method stub
-
-        super.setUserVisibleHint(isVisibleToUser);
-//        Logger.d("isVisibleToUser");
+    public abstract int provideContentViewId();
 
 
-        if (isVisibleToUser) {
-
-//            Logger.d("isVisibleToUser");
-            isVisible = true;
-
-            onVisible();
-
-        } else {
-
-            isVisible = false;
-
-            onInvisible();
-
-        }
+    public void init() {
 
     }
 
+    public abstract void initView(View rootView);
 
-    /**
-     * 可见
-     */
-
-    protected void onVisible() {
-
-        lazyLoad();
+    public void initListener() {
 
     }
 
-
-    /**
-     * 不可见
-     */
-
-    protected void onInvisible() {
-
-
-    }
-
-
-    /**
-     * 延迟加载    子类必须重写此方法
-     */
-
-    protected void lazyLoad() {
+    public void initData() {
 
     }
 
