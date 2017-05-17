@@ -128,6 +128,9 @@ public class ProjectDetailActivity extends TActivity {
     @BindView(R.id.detail_project_time)
     TextView projectTme;
 
+
+    PageDto<ProjectAttachDto> attachList;
+
     private void initData() {
         String projectId = getIntent().getStringExtra(Constant.EXTRA_PROJECT_ID);
         HttpSubscriber httpSubscriber = new HttpSubscriber(new OnResultCallBack<ProjectPageDto>() {
@@ -145,10 +148,9 @@ public class ProjectDetailActivity extends TActivity {
                 projectTme.setText(detailDto.getCreateTime());
                 decorationInfo.setProjectDetail(detailDto);
                 customerInfo.setProjectDetail(detailDto);
-                Logger.d("detailDto value ->"+detailDto.getDecorationCountLabel());
+                Logger.d("detailDto value ->" + detailDto.getDecorationCountLabel());
                 customerAnalysis.setProjectDetail(detailDto);
-                PageDto<ProjectAttachDto> attachList = projectPageDto.getAttachList();
-
+                attachList = projectPageDto.getAttachList();
 
             }
 
@@ -161,7 +163,8 @@ public class ProjectDetailActivity extends TActivity {
             @Override
             public void onCompleted() {
                 //TODO 界面TEST
-                ProjectPageDto projectPageDto = new ProjectPageDto();
+
+
                 ProjectDetailDto detailDto = new ProjectDetailDto();
                 detailDto.setTitle("写字楼装潢");
                 detailDto.setCreateTime("5月16日 17:00:00");
@@ -170,7 +173,20 @@ public class ProjectDetailActivity extends TActivity {
                 detailDto.setDecorationCategoryLabel("办公室");
                 detailDto.setDecorationCountLabel("test1");
                 detailDto.setAboutDesignLabel("test222222");
+
+                PageDto<ProjectAttachDto> pageDto = new PageDto<>();
+                pageDto.setCurrentPageNum(1);
+
+                ProjectAttachDto projectAttachDto = new ProjectAttachDto();
+                projectAttachDto.setCreateTime("2017年5月17日 10：16：00");
+                List<ProjectAttachDto> projectAttachDtoList = new ArrayList<>();
+                projectAttachDtoList.add(projectAttachDto);
+                pageDto.setDataList(projectAttachDtoList);
+
+
+                ProjectPageDto projectPageDto = new ProjectPageDto();
                 projectPageDto.setDetailDto(detailDto);
+                projectPageDto.setAttachList(pageDto);
                 onSuccess(projectPageDto);
 
             }
@@ -248,7 +264,7 @@ public class ProjectDetailActivity extends TActivity {
             @Override
             public void onClick(View view) {
                 popupWindow.dismiss();
-                UploadDataActivity.start(ProjectDetailActivity.this);
+                UploadDataActivity.start(ProjectDetailActivity.this, attachList);
             }
         });
 

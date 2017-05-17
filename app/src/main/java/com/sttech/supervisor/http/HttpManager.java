@@ -176,12 +176,11 @@ public class HttpManager {
     }
 
     /**
-     * 详情详情
+     * 项目详情
      *
      * @param subscriber
      */
     public void getProjectDetail(Observer<ProjectPageDto> subscriber, String projectId) {
-//        toSubscribe(mRestApi.projectDetail(), subscriber);
         toSubscribe(cacheProvider.getProjectDetail(mRestApi.projectDetail(projectId), new EvictDynamicKey(true), new DynamicKey(projectId)), subscriber);
     }
 

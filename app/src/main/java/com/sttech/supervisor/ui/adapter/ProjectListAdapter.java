@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sttech.supervisor.R;
+import com.sttech.supervisor.dto.ProjectListDto;
 import com.sttech.supervisor.entity.Project;
 import com.sttech.supervisor.ui.widget.xrecyclerview.RecyclerAdapter;
 
@@ -20,13 +21,13 @@ import java.util.List;
  */
 
 
-public class ProjectListAdapter extends RecyclerAdapter<Project, ProjectListAdapter.RecViewHolder> {
+public class ProjectListAdapter extends RecyclerAdapter<ProjectListDto, ProjectListAdapter.RecViewHolder> {
 
     public ProjectListAdapter(Context context) {
         super(context);
     }
 
-    public ProjectListAdapter(Context context, List<Project> data) {
+    public ProjectListAdapter(Context context, List<ProjectListDto> data) {
         super(context, data);
     }
 
@@ -39,10 +40,10 @@ public class ProjectListAdapter extends RecyclerAdapter<Project, ProjectListAdap
     public void onBindViewHolder(final RecViewHolder holder, final int position) {
 
         holder.projectTitleTv.setText(data.get(position).getTitle());
-        holder.projectAddressTv.setText(data.get(position).getAddress());
-        holder.projectTypeTv.setText(data.get(position).getType());
-        holder.projectManagerTv.setText(data.get(position).getManager());
-        holder.workRecordCountTv.setText(data.get(position).getWorkRecordCount());
+        holder.projectAddressTv.setText(data.get(position).getFullProjectAddress());
+        holder.projectTypeTv.setText(data.get(position).getDecorationCategoryLabel());
+        holder.projectManagerTv.setText(data.get(position).getProjectManagerName());
+        holder.workRecordCountTv.setText(String.valueOf(data.get(position).getWorkNoteCount()));
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

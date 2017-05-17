@@ -3,6 +3,7 @@ package com.sttech.supervisor.ui.fragment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.widget.OrientationHelper;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -24,6 +25,7 @@ import com.baidu.location.Poi;
 import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.MyApp;
 import com.sttech.supervisor.R;
+import com.sttech.supervisor.dto.ProjectListDto;
 import com.sttech.supervisor.entity.Project;
 import com.sttech.supervisor.http.HttpManager;
 import com.sttech.supervisor.http.callback.OnResultCallBack;
@@ -34,6 +36,7 @@ import com.sttech.supervisor.ui.adapter.AreaAdapter;
 import com.sttech.supervisor.ui.adapter.GirdDropDownAdapter;
 import com.sttech.supervisor.ui.adapter.ProjectListAdapter;
 import com.sttech.supervisor.ui.fragment.dialog.DialogFragmentHelper;
+import com.sttech.supervisor.ui.widget.AdvanceDecoration;
 import com.sttech.supervisor.ui.widget.DropDownMenu;
 import com.sttech.supervisor.ui.widget.SpacesItemDecoration;
 import com.sttech.supervisor.ui.widget.citypicker.adapter.CityListAdapter;
@@ -81,8 +84,9 @@ public class HomeFragment extends TFragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        for (int i = 0; i < 3; i++)
-                            projectListAdapter.addElement(0, new Project("高档写字楼装修" + (++position), "12", "写字楼", "韦先生", "广东省深圳市宝安区坂田大道"));
+                        for (int i = 0; i < 3; i++) {
+                            projectListAdapter.addElement(0, new ProjectListDto("高档写字楼装修" + (++position), "写字楼", "韦先生", "广东省深圳市宝安区坂田大道", 12, "未抢单"));
+                        }
                         xRecyclerView.refreshComlete();
                     }
                 }, 500);
@@ -93,8 +97,14 @@ public class HomeFragment extends TFragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        for (int i = 0; i < 2; i++)
-                            projectListAdapter.addElement(new Project("创业公司装修" + (++position), "0", "办公室", "陈先生", "广东省深圳市宝安区西乡大厦"));
+                        for (int i = 0; i < 2; i++) {
+                            projectListAdapter.addElement(new ProjectListDto("创业公司装修" + (++position), "办公室", "陈先生", "广东省深圳市宝安区西乡大厦", 9, "未抢单"));
+                        }
+
+//                        xRecyclerView.loadMoreNoData();
+
+//                        xRecyclerView.loadMoreNoData("没有更多数据了");
+//                        xRecyclerView.refreshComlete();
                         xRecyclerView.refreshComlete();
                     }
                 }, 400);
@@ -102,16 +112,16 @@ public class HomeFragment extends TFragment {
         });
 
         xRecyclerView.autoRefresh();
-        projectListAdapter.setRecItemClick(new RecyclerItemCallback<Project, ProjectListAdapter.RecViewHolder>() {
+        projectListAdapter.setRecItemClick(new RecyclerItemCallback<ProjectListDto, ProjectListAdapter.RecViewHolder>() {
             @Override
-            public void onItemClick(int position, Project model, ProjectListAdapter.RecViewHolder holder) {
+            public void onItemClick(int position, ProjectListDto model, ProjectListAdapter.RecViewHolder holder) {
                 super.onItemClick(position, model, holder);
                 ProjectDetailActivity.start(getActivity(), "123456", true);
-
             }
         });
 
-        xRecyclerView.addItemDecoration(new SpacesItemDecoration(0, dip2px(15)));
+        xRecyclerView.addItemDecoration(new AdvanceDecoration(getActivity(), OrientationHelper.VERTICAL, dip2px(15)));
+//        xRecyclerView.addItemDecoration(new SpacesItemDecoration(0, dip2px(15)));
     }
 
     private DropDownMenu mDropDownMenu;

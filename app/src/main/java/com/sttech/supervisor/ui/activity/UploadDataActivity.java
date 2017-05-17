@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 
+import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.R;
+import com.sttech.supervisor.dto.PageDto;
+import com.sttech.supervisor.dto.ProjectAttachDto;
 import com.sttech.supervisor.ui.adapter.ProjectDataListAdapter;
 import com.sttech.supervisor.entity.ProjectData;
 import com.sttech.supervisor.ui.widget.SpacesItemDecoration;
@@ -22,8 +25,19 @@ import com.sttech.supervisor.ui.widget.xrecyclerview.XRecyclerView;
 
 public class UploadDataActivity extends TActivity {
 
+    private static final String EXTRA_KEY_ATTACH = "attachList";
+
     public static void start(Context context) {
         Intent intent = new Intent(context, UploadDataActivity.class);
+        context.startActivity(intent);
+    }
+
+
+    public static void start(Context context, PageDto<ProjectAttachDto> attachList) {
+        Intent intent = new Intent(context, UploadDataActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(EXTRA_KEY_ATTACH, attachList);
+        intent.putExtras(bundle);
         context.startActivity(intent);
     }
 
@@ -32,6 +46,7 @@ public class UploadDataActivity extends TActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_upload_data);
         initView();
+        initData();
     }
 
     private static int position = 0;
@@ -79,6 +94,12 @@ public class UploadDataActivity extends TActivity {
         });
         xRecyclerView.addItemDecoration(new SpacesItemDecoration(0, 30));
 
+    }
+
+    private void initData() {
+        PageDto<ProjectAttachDto> attachList = (PageDto<ProjectAttachDto>) getIntent().getSerializableExtra(EXTRA_KEY_ATTACH);
+        Logger.d("attachList value ->" + attachList.getCurrentPageNum());
+        Logger.d("attachList value ->" + attachList.getDataList().get(0).getCreateTime());
     }
 
 }

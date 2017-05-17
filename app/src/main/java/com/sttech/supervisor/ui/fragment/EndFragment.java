@@ -49,12 +49,6 @@ public class EndFragment extends TFragment {
             initView(view);// 控件初始化
         }
         return view;
-
-
-//        View view = inflater.inflate(R.layout.fr_grabsingle_end, container, false);
-////        initData();
-//        initView(view);
-//        return view;
     }
 
     @Override

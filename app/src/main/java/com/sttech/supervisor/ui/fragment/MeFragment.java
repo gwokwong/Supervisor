@@ -10,6 +10,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.orhanobut.logger.Logger;
+import com.raizlabs.android.dbflow.sql.language.Condition;
+import com.raizlabs.android.dbflow.sql.language.Delete;
+import com.raizlabs.android.dbflow.sql.language.SQLCondition;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.sql.language.Select;
 import com.sttech.supervisor.MyApp;
@@ -128,18 +131,27 @@ public class MeFragment extends TFragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view == logoutBtn) {
-//            List<MobileLoginResult> results = new Select().from(MobileLoginResult.class).queryList();
-//            String userId = results.get(0).getUserId();
+            List<MobileLoginResult> results = new Select().from(MobileLoginResult.class).queryList();
+            String userId = results.get(0).getUserId();
 //            List<Integer> uidList = new ArrayList<>();
 //            SQLCondition condition = Condition.column(MobileLoginResult_Table.userId.eq(userId));
 
-            List<MobileLoginResult> record =  new Select()
-                    .from(MobileLoginResult.class)
-                    .where(MobileLoginResult_Table.userId.eq(MyApp.getInstance().getUserId())).queryList();
-            Logger.d("record size-->" + record.size());
-            for (MobileLoginResult mobileLoginResult : record) {
-                mobileLoginResult.delete();
-            }
+//            List<MobileLoginResult> record =  new Select()
+//                    .from(MobileLoginResult.class)
+//                    .where(MobileLoginResult_Table.userId.eq(MyApp.getInstance().getUserId())).queryList();
+//            Logger.d("record size-->" + record.size());
+//            for (MobileLoginResult mobileLoginResult : record) {
+//                mobileLoginResult.delete();
+//            }
+
+            Delete.table(MobileLoginResult.class);
+
+
+//            SQLCondition condition = Condition.column(MobileLoginResult_Table.userId.getNameAlias()).eq(userId);
+//
+//            Delete.table(MobileLoginResult.class).(condition);
+
+
 
             Intent intent = new Intent(getActivity(), SignInActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);

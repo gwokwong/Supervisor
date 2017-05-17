@@ -13,6 +13,7 @@ import com.birbit.android.jobqueue.log.CustomLogger;
 import com.orhanobut.logger.Logger;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.Select;
+import com.sttech.supervisor.crash.CrashHandler;
 import com.sttech.supervisor.db.MobileLoginResult;
 import com.sttech.supervisor.http.HttpManager;
 import com.sttech.supervisor.map.LocationService;
@@ -43,6 +44,10 @@ public class MyApp extends Application {
         HttpManager.init(this);
         //异常记录日志
 //        AppCrash.getInstance().init(this);
+
+        CrashHandler mCrashHandler = CrashHandler.getInstance();
+        mCrashHandler.setCustomCrashHanler(getApplicationContext());
+
         //初始化定位sdk，建议在Application中创建
         locationService = new LocationService(getApplicationContext());
         mVibrator = (Vibrator) getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
@@ -147,7 +152,7 @@ public class MyApp extends Application {
         Logger.d("MobileLoginResult size --------------------->" + mobileLoginResultSize);
 //        Logger.d("MobileLoginResult value --------------------->" + results.get(0).toString());
 
-        return mobileLoginResultSize > 0;
+        return new Select().from(MobileLoginResult.class).queryList().size() > 0;
     }
 
     public void setLogin(boolean login) {

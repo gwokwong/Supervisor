@@ -30,4 +30,6 @@ public interface CacheProvider {
 
     @LifeCache(duration = 30, timeUnit = TimeUnit.DAYS)
     Observable<MobileResponse<ProjectPageDto>> getProjectDetail(Observable<MobileResponse<ProjectPageDto>> observable, EvictDynamicKey evictDynamicKey, DynamicKey dynamicKey);
+
+
 }

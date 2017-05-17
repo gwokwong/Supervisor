@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.orhanobut.logger.Logger;
+import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.sttech.supervisor.Constant;
 import com.sttech.supervisor.MyApp;
 import com.sttech.supervisor.R;
@@ -128,8 +129,9 @@ public class SignInActivity extends TActivity {
                 Logger.d("onSuccess" + data);
                 toast(data);
                 SpUtils.put(Constant.SP_KEY_IS_FIRST, false);
-                SpUtils.put(Constant.SP_KEY_IS_LOGIN, true);
+//                SpUtils.put(Constant.SP_KEY_IS_LOGIN, true);
                 MainActivity.start(SignInActivity.this);
+                Delete.table(MobileLoginResult.class);
                 MobileLoginResult result = new MobileLoginResult();
                 result.setUserName("韦国旺");
                 result.setUserId("10010");
