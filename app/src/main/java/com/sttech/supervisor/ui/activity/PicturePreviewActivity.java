@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.sttech.supervisor.Constant;
 import com.sttech.supervisor.R;
+import com.sttech.supervisor.dto.ImageDto;
 import com.sttech.supervisor.entity.LocalMedia;
 import com.sttech.supervisor.ui.fragment.PictureImagePreviewFragment;
 import com.sttech.supervisor.ui.widget.PreviewViewPager;
@@ -25,11 +26,11 @@ import java.util.List;
  */
 
 
-public class PictureExternalPreviewActivity extends TActivity {
+public class PicturePreviewActivity extends TActivity {
     private ImageButton left_back;
     private TextView tv_title;
     private PreviewViewPager viewPager;
-    private List<LocalMedia> images = new ArrayList<>();
+    private List<ImageDto> images = new ArrayList<>();
     private int position = 0;
     private SimpleFragmentAdapter adapter;
 
@@ -42,7 +43,7 @@ public class PictureExternalPreviewActivity extends TActivity {
         left_back = (ImageButton) findViewById(R.id.left_back);
         viewPager = (PreviewViewPager) findViewById(R.id.preview_pager);
         position = getIntent().getIntExtra(Constant.EXTRA_PREVIEW_POSITION, 0);
-        images = (List<LocalMedia>) getIntent().getSerializableExtra(Constant.EXTRA_PREVIEW_SELECT_LIST);
+        images = (List<ImageDto>) getIntent().getSerializableExtra(Constant.EXTRA_PREVIEW_SELECT_LIST);
         left_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,8 +95,12 @@ public class PictureExternalPreviewActivity extends TActivity {
 //                path = media.getPath();
 //            }
 //            PictureImagePreviewFragment fragment = PictureImagePreviewFragment.getInstance(path, images);
-//            return fragment;
-            return null;
+
+
+            ImageDto imageDto = images.get(position);
+            PictureImagePreviewFragment fragment = PictureImagePreviewFragment.getInstance(imageDto.getPath(), images);
+
+            return fragment;
         }
 
         @Override

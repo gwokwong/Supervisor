@@ -16,6 +16,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.sttech.supervisor.Constant;
 import com.sttech.supervisor.R;
+import com.sttech.supervisor.dto.ImageDto;
 import com.sttech.supervisor.entity.LocalMedia;
 
 import java.io.Serializable;
@@ -34,10 +35,20 @@ import uk.co.senab.photoview.PhotoViewAttacher;
  */
 public class PictureImagePreviewFragment extends Fragment {
     public static final String PATH = "path";
-    private List<LocalMedia> selectImages = new ArrayList<>();
+    //    private List<LocalMedia> selectImages = new ArrayList<>();
+    private List<ImageDto> selectImages = new ArrayList<>();
 
 
-    public static PictureImagePreviewFragment getInstance(String path, List<LocalMedia> medias) {
+//    public static PictureImagePreviewFragment getInstance(String path, List<LocalMedia> medias) {
+//        PictureImagePreviewFragment fragment = new PictureImagePreviewFragment();
+//        Bundle bundle = new Bundle();
+//        bundle.putString(PATH, path);
+//        bundle.putSerializable(Constant.EXTRA_PREVIEW_SELECT_LIST, (Serializable) medias);
+//        fragment.setArguments(bundle);
+//        return fragment;
+//    }
+
+    public static PictureImagePreviewFragment getInstance(String path, List<ImageDto> medias) {
         PictureImagePreviewFragment fragment = new PictureImagePreviewFragment();
         Bundle bundle = new Bundle();
         bundle.putString(PATH, path);
@@ -52,7 +63,8 @@ public class PictureImagePreviewFragment extends Fragment {
         View contentView = inflater.inflate(R.layout.picture_fragment_image_preview, container, false);
         final ImageView imageView = (ImageView) contentView.findViewById(R.id.preview_image);
         final PhotoViewAttacher mAttacher = new PhotoViewAttacher(imageView);
-        selectImages = (List<LocalMedia>) getArguments().getSerializable(Constant.EXTRA_PREVIEW_SELECT_LIST);
+//        selectImages = (List<LocalMedia>) getArguments().getSerializable(Constant.EXTRA_PREVIEW_SELECT_LIST);
+        selectImages = (List<ImageDto>) getArguments().getSerializable(Constant.EXTRA_PREVIEW_SELECT_LIST);
         String path = getArguments().getString(PATH);
         Glide.with(container.getContext())
                 .load(path)

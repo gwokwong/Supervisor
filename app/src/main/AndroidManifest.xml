@@ -75,6 +75,8 @@
 
         <activity android:name=".ui.activity.PictureExternalPreviewActivity" />
 
+        <activity android:name=".ui.activity.PicturePreviewActivity" />
+
         <activity android:name=".ui.activity.ErrorPromptActivity" />
 
         <activity android:name=".ui.activity.UploadDataActivity" />
