@@ -82,6 +82,35 @@
     <string name="simple_work_record_body">今天花了很多时间,看下装修结果吧.今天花了很多时间,看下装修结果吧今天花了很多时间,看下装修结果吧今天花了很多时间,看下装修结果吧今天花了很多时间,看下装修结果吧</string>
     <string name="import_data">输入资料</string>
     <string name="loading">加载中...</string>
+    <string name="projectFullAddress">项目地址</string>
+    <string name="decorationCategoryLabel">装修类型</string>
+    <string name="decorationLevelLabel">装修档次</string>
+    <string name="officeBuildingLevelLabel">楼盘属性</string>
+    <string name="constructionSpaceLabel">施工面积</string>
+    <string name="projectRequirementLabel">项目需求</string>
+    <string name="budgetForProjectLabel">装修预算</string>
+    <string name="projectPeriodLabel">项目周期</string>
+    <string name="qualityPriceRatioLabel">性 价 比</string>
+    <string name="decorationStyleLabel">风格要求</string>
+    <string name="designRequirementLabel">设计要求</string>
+    <string name="environmentProtectionLabel">环保要求</string>
+    <string name="companyName">公司名称</string>
+    <string name="companyStartupFund">注册资金</string>
+    <string name="companyOwner">公司法人</string>
+    <string name="runTimeLabel">经营期限</string>
+    <string name="stockStructure">股东结构</string>
+    <string name="companyScopeLabel">经营范围</string>
+    <string name="companyStageLabel">企业阶段</string>
+    <string name="companyManCountLabel">企业员工</string>
+    <string name="decorationCountLabel">装修次数</string>
+    <string name="aboutDesignLabel">设计方面</string>
+    <string name="aboutMaterialLabel">材料方面</string>
+    <string name="aboutConstructionLabel">施工方面</string>
+    <string name="aboutProcessLabel">流程方面</string>
+    <string name="aboutGongzhuangLabel">公 装 网</string>
+    <string name="aboutDecorationCompanyLabel">装修公司</string>
+    <string name="buyForLabel">采购标准</string>
+    <string name="belongToIndustry">行业说明</string>
 
 
 </resources>

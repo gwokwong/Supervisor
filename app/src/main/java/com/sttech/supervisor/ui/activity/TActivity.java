@@ -31,10 +31,8 @@ public abstract class TActivity extends AutoLayoutActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        onCreateBinding();
     }
 
-    public abstract void onCreateBinding();
 
     public <T extends View> T findById(int resId) {
         return (T) findViewById(resId);

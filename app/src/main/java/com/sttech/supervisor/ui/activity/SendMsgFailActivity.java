@@ -101,9 +101,4 @@ public class SendMsgFailActivity extends TActivity {
     }
 
 
-    @Override
-    public void onCreateBinding() {
-
-    }
-
 }

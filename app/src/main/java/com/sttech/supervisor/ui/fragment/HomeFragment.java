@@ -2,6 +2,7 @@ package com.sttech.supervisor.ui.fragment;
 
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -24,11 +25,15 @@ import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.MyApp;
 import com.sttech.supervisor.R;
 import com.sttech.supervisor.entity.Project;
+import com.sttech.supervisor.http.HttpManager;
+import com.sttech.supervisor.http.callback.OnResultCallBack;
+import com.sttech.supervisor.http.subscriber.HttpSubscriber;
 import com.sttech.supervisor.map.LocationService;
 import com.sttech.supervisor.ui.activity.ProjectDetailActivity;
 import com.sttech.supervisor.ui.adapter.AreaAdapter;
 import com.sttech.supervisor.ui.adapter.GirdDropDownAdapter;
 import com.sttech.supervisor.ui.adapter.ProjectListAdapter;
+import com.sttech.supervisor.ui.fragment.dialog.DialogFragmentHelper;
 import com.sttech.supervisor.ui.widget.DropDownMenu;
 import com.sttech.supervisor.ui.widget.SpacesItemDecoration;
 import com.sttech.supervisor.ui.widget.citypicker.adapter.CityListAdapter;
@@ -101,7 +106,7 @@ public class HomeFragment extends TFragment {
             @Override
             public void onItemClick(int position, Project model, ProjectListAdapter.RecViewHolder holder) {
                 super.onItemClick(position, model, holder);
-                ProjectDetailActivity.start(getActivity(),"123456",true);
+                ProjectDetailActivity.start(getActivity(), "123456", true);
 
             }
         });
@@ -260,6 +265,35 @@ public class HomeFragment extends TFragment {
 
         }
     };
+
+    private DialogFragment mDialogFragment;
+
+    private void test() {
+        HttpSubscriber httpSubscriber = new HttpSubscriber(new OnResultCallBack<String>() {
+
+            @Override
+            public void onStart() {
+                mDialogFragment = DialogFragmentHelper.showProgress(getActivity().getSupportFragmentManager(), "数据加载中...");
+            }
+
+            @Override
+            public void onSuccess(String data) {
+                toastInfo(data);
+            }
+
+            @Override
+            public void onError(int code, String errorMsg) {
+                toastInfo(errorMsg);
+
+            }
+
+            @Override
+            public void onCompleted() {
+                mDialogFragment.dismiss();
+            }
+        });
+        HttpManager.getInstance().getLocation(httpSubscriber);
+    }
 
     @Override
     public void onStart() {

@@ -84,10 +84,7 @@ public class MyMsgActivity extends TActivity {
     }
 
 
-    @Override
-    public void onCreateBinding() {
 
-    }
 
 
 }

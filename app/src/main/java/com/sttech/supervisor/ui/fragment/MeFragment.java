@@ -1,24 +1,30 @@
 package com.sttech.supervisor.ui.fragment;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.orhanobut.logger.Logger;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
+import com.raizlabs.android.dbflow.sql.language.Select;
 import com.sttech.supervisor.MyApp;
 import com.sttech.supervisor.R;
+import com.sttech.supervisor.db.MobileLoginResult;
+import com.sttech.supervisor.db.MobileLoginResult_Table;
 import com.sttech.supervisor.event.MeEvent;
 import com.sttech.supervisor.ui.activity.EndProjectActivity;
 import com.sttech.supervisor.ui.activity.MyMsgActivity;
 import com.sttech.supervisor.ui.activity.SendMsgFailActivity;
 import com.sttech.supervisor.ui.activity.SignInActivity;
+
+import java.util.List;
+
+import butterknife.BindView;
 
 /**
  * function :
@@ -27,20 +33,6 @@ import com.sttech.supervisor.ui.activity.SignInActivity;
  */
 
 public class MeFragment extends TFragment implements View.OnClickListener {
-
-//
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//    }
-//
-//    @Nullable
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.fr_me, container, false);
-//        initView(view);
-//        return view;
-//    }
 
     @Override
     public int provideContentViewId() {
@@ -66,16 +58,22 @@ public class MeFragment extends TFragment implements View.OnClickListener {
 
     }
 
-    private RoundedImageView headImg;
-    private TextView nameTv, jobTv, mobilephoneTv;
+    @BindView(R.id.me_head)
+    RoundedImageView headImg;
+
+    @BindView(R.id.me_name)
+    TextView nameTv;
+
+    private TextView jobTv, mobilephoneTv;
+
     private Button logoutBtn;
     private LinearLayout msgll, endProjectll, sendErrorll;
     private TextView msgCountTv, sendFailCountTv;
 
     @Override
     public void initView(View view) {
-        headImg = (RoundedImageView) view.findViewById(R.id.me_head);
-        nameTv = (TextView) view.findViewById(R.id.me_name);
+//        headImg = (RoundedImageView) view.findViewById(R.id.me_head);
+//        nameTv = (TextView) view.findViewById(R.id.me_name);
         jobTv = (TextView) view.findViewById(R.id.me_job);
         mobilephoneTv = (TextView) view.findViewById(R.id.me_mobile_phone);
         logoutBtn = (Button) view.findViewById(R.id.me_logout_btn);
@@ -91,15 +89,62 @@ public class MeFragment extends TFragment implements View.OnClickListener {
         msgll.setOnClickListener(this);
         endProjectll.setOnClickListener(this);
         sendErrorll.setOnClickListener(this);
+
+        MobileLoginResult result = new Select().from(MobileLoginResult.class).querySingle();
+//        Glide.with(getActivity())
+//                .load(result.getAvatarPath())
+//                .asBitmap().centerCrop()
+//                .placeholder(R.mipmap.ic_launcher)
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .into((headImg));
+
+
     }
 
+//    public void setUserInfo(MobileLoginResult result) {
+//
+//        MobileLoginResult result = new Select().from(MobileLoginResult.class).querySingle();
+//        Glide.with(getActivity())
+//                .load(result.getAvatarPath())
+//                .asBitmap().centerCrop()
+//                .placeholder(R.mipmap.ic_launcher)
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .into((headImg));
+//    }
+
+
+    @Override
+    public void initData() {
+        MobileLoginResult result = new Select().from(MobileLoginResult.class).querySingle();
+        nameTv.setText(result.getUserName());
+        Glide.with(getActivity())
+                .load(result.getAvatarPath())
+                .asBitmap().centerCrop()
+                .placeholder(R.mipmap.cloudwalk_face_head)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into((headImg));
+    }
 
     @Override
     public void onClick(View view) {
         if (view == logoutBtn) {
+//            List<MobileLoginResult> results = new Select().from(MobileLoginResult.class).queryList();
+//            String userId = results.get(0).getUserId();
+//            List<Integer> uidList = new ArrayList<>();
+//            SQLCondition condition = Condition.column(MobileLoginResult_Table.userId.eq(userId));
+
+            List<MobileLoginResult> record =  new Select()
+                    .from(MobileLoginResult.class)
+                    .where(MobileLoginResult_Table.userId.eq(MyApp.getInstance().getUserId())).queryList();
+            Logger.d("record size-->" + record.size());
+            for (MobileLoginResult mobileLoginResult : record) {
+                mobileLoginResult.delete();
+            }
+
             Intent intent = new Intent(getActivity(), SignInActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            MyApp.getInstance().setLogin(false);
+
+//            MyApp.getInstance().setLogin(false);
             getActivity().finish();
         } else if (view == msgll) {
             MyMsgActivity.start(getActivity());

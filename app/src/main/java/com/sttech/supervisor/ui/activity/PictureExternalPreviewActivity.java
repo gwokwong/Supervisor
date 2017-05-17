@@ -109,8 +109,5 @@ public class PictureExternalPreviewActivity extends TActivity {
         super.onDestroy();
     }
 
-    @Override
-    public void onCreateBinding() {
 
-    }
 }

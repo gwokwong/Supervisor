@@ -15,9 +15,10 @@
 
             <TextView
                 style="@style/detail_small_title"
-                android:text="装修次数" />
+                android:text="@string/decorationCountLabel" />
 
             <TextView
+                android:id="@+id/decorationCountLabel"
                 style="@style/detail_small_body"
                 android:text="yyyyyyyyyyyyyyyyyyyyyyyy" />
 
@@ -27,9 +28,10 @@
 
             <TextView
                 style="@style/detail_small_title"
-                android:text="设计方面" />
+                android:text="@string/aboutDesignLabel" />
 
             <TextView
+                android:id="@+id/aboutDesignLabel"
                 style="@style/detail_small_body"
                 android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
 
@@ -39,9 +41,10 @@
 
             <TextView
                 style="@style/detail_small_title"
-                android:text="材料方面" />
+                android:text="@string/aboutMaterialLabel" />
 
             <TextView
+                android:id="@+id/aboutMaterialLabel"
                 style="@style/detail_small_body"
                 android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
 
@@ -51,34 +54,10 @@
 
             <TextView
                 style="@style/detail_small_title"
-                android:text="施工方面" />
+                android:text="@string/aboutConstructionLabel" />
 
             <TextView
-                style="@style/detail_small_body"
-                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
-
-        </LinearLayout>
-
-
-        <LinearLayout style="@style/detail_ll">
-
-            <TextView
-                style="@style/detail_small_title"
-                android:text="流程方面" />
-
-            <TextView
-                style="@style/detail_small_body"
-                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
-
-        </LinearLayout>
-
-        <LinearLayout style="@style/detail_ll">
-
-            <TextView
-                style="@style/detail_small_title"
-                android:text="公 装 网" />
-
-            <TextView
+                android:id="@+id/aboutConstructionLabel"
                 style="@style/detail_small_body"
                 android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
 
@@ -89,9 +68,24 @@
 
             <TextView
                 style="@style/detail_small_title"
-                android:text="装修公司" />
+                android:text="@string/aboutProcessLabel" />
 
             <TextView
+                android:id="@+id/aboutProcessLabel"
+                style="@style/detail_small_body"
+                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+
+                style="@style/detail_small_title"
+                android:text="@string/aboutGongzhuangLabel" />
+
+            <TextView
+                android:id="@+id/aboutGongzhuangLabel"
                 style="@style/detail_small_body"
                 android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
 
@@ -102,9 +96,24 @@
 
             <TextView
                 style="@style/detail_small_title"
-                android:text="采购标准" />
+                android:text="@string/aboutDecorationCompanyLabel" />
 
             <TextView
+                android:id="@+id/aboutDecorationCompanyLabel"
+                style="@style/detail_small_body"
+                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
+
+        </LinearLayout>
+
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="@string/buyForLabel" />
+
+            <TextView
+                android:id="@+id/buyForLabel"
                 style="@style/detail_small_body"
                 android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
 
@@ -114,9 +123,10 @@
 
             <TextView
                 style="@style/detail_small_title"
-                android:text="行业说明" />
+                android:text="@string/belongToIndustry" />
 
             <TextView
+                android:id="@+id/belongToIndustry"
                 style="@style/detail_small_body"
                 android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
 

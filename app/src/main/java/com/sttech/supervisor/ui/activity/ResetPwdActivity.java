@@ -54,11 +54,6 @@ public class ResetPwdActivity extends TActivity {
 
     }
 
-    @Override
-    public void onCreateBinding() {
-
-
-    }
 
     public void resetOnClick(View view) {
         if (view.getId() == R.id.sign_in_btn) {

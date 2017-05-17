@@ -81,8 +81,4 @@ public class UploadDataActivity extends TActivity {
 
     }
 
-    @Override
-    public void onCreateBinding() {
-
-    }
 }

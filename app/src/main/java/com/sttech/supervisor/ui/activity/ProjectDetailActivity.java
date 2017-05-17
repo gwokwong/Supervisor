@@ -20,7 +20,6 @@ import android.widget.TextView;
 import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.Constant;
 import com.sttech.supervisor.R;
-import com.sttech.supervisor.dto.MobileResponse;
 import com.sttech.supervisor.dto.PageDto;
 import com.sttech.supervisor.dto.ProjectAttachDto;
 import com.sttech.supervisor.dto.ProjectDetailDto;
@@ -107,6 +106,7 @@ public class ProjectDetailActivity extends TActivity {
 
         TabPagerAdapter tabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), mTitles, fragmentList);
         vp.setAdapter(tabPagerAdapter);
+        vp.setOffscreenPageLimit(3);
         tl.setupWithViewPager(vp);
         tl.post(new Runnable() {
             @Override
@@ -120,7 +120,13 @@ public class ProjectDetailActivity extends TActivity {
 
 
     @BindView(R.id.detail_project_title)
-    public TextView projectTitle;
+    TextView projectTitle;
+
+    @BindView(R.id.detail_project_manager)
+    TextView projectManager;
+
+    @BindView(R.id.detail_project_time)
+    TextView projectTme;
 
     private void initData() {
         String projectId = getIntent().getStringExtra(Constant.EXTRA_PROJECT_ID);
@@ -132,15 +138,18 @@ public class ProjectDetailActivity extends TActivity {
 
             @Override
             public void onSuccess(ProjectPageDto projectPageDto) {
-//                ProjectDetailDto detailDto = projectPageDto.getDetailDto();
-//                ProjectDetailDto detailDto = new ProjectDetailDto();
-//                detailDto.setTitle("写字楼装潢");
-//                detailDto.setCreateTime("5月16日 15:00:00");
-//                detailDto.setCustomerManagerName("赵春来");
-//                ((TextView) findById(R.id.detail_project_title)).setText(detailDto.getTitle());
-//                ((TextView) findById(R.id.detail_project_time)).setText(detailDto.getCreateTime());
-//                ((TextView) findById(R.id.detail_project_manager)).setText(detailDto.getCustomerManagerName());
-//                PageDto<ProjectAttachDto> attachList = projectPageDto.getAttachList();
+
+                ProjectDetailDto detailDto = projectPageDto.getDetailDto();
+                projectTitle.setText(detailDto.getTitle());
+                projectManager.setText(detailDto.getCustomerManagerName());
+                projectTme.setText(detailDto.getCreateTime());
+                decorationInfo.setProjectDetail(detailDto);
+                customerInfo.setProjectDetail(detailDto);
+                Logger.d("detailDto value ->"+detailDto.getDecorationCountLabel());
+                customerAnalysis.setProjectDetail(detailDto);
+                PageDto<ProjectAttachDto> attachList = projectPageDto.getAttachList();
+
+
             }
 
 
@@ -151,21 +160,22 @@ public class ProjectDetailActivity extends TActivity {
 
             @Override
             public void onCompleted() {
-
-                //TODO TEST
+                //TODO 界面TEST
+                ProjectPageDto projectPageDto = new ProjectPageDto();
                 ProjectDetailDto detailDto = new ProjectDetailDto();
                 detailDto.setTitle("写字楼装潢");
-                detailDto.setCreateTime("5月16日 15:00:00");
+                detailDto.setCreateTime("5月16日 17:00:00");
                 detailDto.setCustomerManagerName("赵春来");
-                projectTitle.setText(detailDto.getTitle());
-//                ((TextView) findById(R.id.detail_project_title)).setText(detailDto.getTitle());
-                ((TextView) findById(R.id.detail_project_time)).setText(detailDto.getCreateTime());
-                ((TextView) findById(R.id.detail_project_manager)).setText(detailDto.getCustomerManagerName());
+                detailDto.setFullProjectAddress("东风西路197号国际金融大厦");
+                detailDto.setDecorationCategoryLabel("办公室");
+                detailDto.setDecorationCountLabel("test1");
+                detailDto.setAboutDesignLabel("test222222");
+                projectPageDto.setDetailDto(detailDto);
+                onSuccess(projectPageDto);
 
             }
         });
         HttpManager.getInstance().getProjectDetail(httpSubscriber, projectId);
-
     }
 
 
@@ -178,10 +188,6 @@ public class ProjectDetailActivity extends TActivity {
 
     }
 
-    @Override
-    public void onCreateBinding() {
-
-    }
 
     private PopupWindow popupWindow;
 

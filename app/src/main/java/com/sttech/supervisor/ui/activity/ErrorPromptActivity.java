@@ -35,10 +35,6 @@ public class ErrorPromptActivity extends TActivity {
         context.startActivity(intent);
     }
 
-    @Override
-    public void onCreateBinding() {
-
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

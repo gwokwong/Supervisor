@@ -32,7 +32,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HttpManager {
     public static final String TAG = HttpManager.class.getSimpleName();
-    private static final int DEFAULT_TIMEOUT = 8;
+    private static final int DEFAULT_TIMEOUT = 10;
     private Retrofit mRetrofit;
     private RestApi mRestApi;
     private final CacheProvider cacheProvider;
@@ -44,7 +44,7 @@ public class HttpManager {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
-                Log.i("HttpManager", message);
+                Log.d(TAG, message);
             }
         });
         loggingInterceptor.setLevel(level);
@@ -213,6 +213,7 @@ public class HttpManager {
                 .map(new Function<MobileResponse<T>, T>() {
                     @Override
                     public T apply(@NonNull MobileResponse<T> tMobileResponse) throws Exception {
+
                         int code = tMobileResponse.getCode();
                         if (code == MobileResponse.CODE_OK) {
                             return tMobileResponse.getData();

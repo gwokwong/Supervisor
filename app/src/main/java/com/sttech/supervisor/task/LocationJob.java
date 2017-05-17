@@ -9,14 +9,10 @@ import com.birbit.android.jobqueue.Job;
 import com.birbit.android.jobqueue.Params;
 import com.birbit.android.jobqueue.RetryConstraint;
 import com.orhanobut.logger.Logger;
-import com.raizlabs.android.dbflow.sql.language.Select;
 import com.sttech.supervisor.MyApp;
 import com.sttech.supervisor.db.LocationInfo;
-import com.sttech.supervisor.db.LocationInfo_Table;
 import com.sttech.supervisor.event.MeEvent;
 import com.sttech.supervisor.map.LocationService;
-
-import java.util.List;
 
 import de.greenrobot.event.EventBus;
 

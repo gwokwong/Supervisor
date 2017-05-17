@@ -1,6 +1,13 @@
 package com.sttech.supervisor.dto;
 
-public class MobileResponse<T> {
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.ModelContainer;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+import com.sttech.supervisor.db.AppDatabase;
+
+
+public class MobileResponse<T>  {
 
     public final static int CODE_OK = 1000;                        // 正常返回
     public final static int CODE_INVALID_SESSION = 2000;        // 登录超时

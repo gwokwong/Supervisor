@@ -15,9 +15,10 @@
 
             <TextView
                 style="@style/detail_small_title"
-                android:text="公司名称" />
+                android:text="@string/companyName" />
 
             <TextView
+                android:id="@+id/companyName"
                 style="@style/detail_small_body"
                 android:text="yyyyyyyyyyyyyyyyyyyyyyyy" />
 
@@ -27,9 +28,10 @@
 
             <TextView
                 style="@style/detail_small_title"
-                android:text="注册资金" />
+                android:text="@string/companyStartupFund" />
 
             <TextView
+                android:id="@+id/companyStartupFund"
                 style="@style/detail_small_body"
                 android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
 
@@ -39,9 +41,10 @@
 
             <TextView
                 style="@style/detail_small_title"
-                android:text="公司法人" />
+                android:text="@string/companyOwner" />
 
             <TextView
+                android:id="@+id/companyOwner"
                 style="@style/detail_small_body"
                 android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
 
@@ -51,9 +54,10 @@
 
             <TextView
                 style="@style/detail_small_title"
-                android:text="经营期限" />
+                android:text="@string/runTimeLabel" />
 
             <TextView
+                android:id="@+id/runTimeLabel"
                 style="@style/detail_small_body"
                 android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
 
@@ -63,10 +67,12 @@
         <LinearLayout style="@style/detail_ll">
 
             <TextView
+
                 style="@style/detail_small_title"
-                android:text="股东结构" />
+                android:text="@string/stockStructure" />
 
             <TextView
+                android:id="@+id/stockStructure"
                 style="@style/detail_small_body"
                 android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
 
@@ -76,22 +82,10 @@
 
             <TextView
                 style="@style/detail_small_title"
-                android:text="经营范围" />
+                android:text="@string/companyScopeLabel" />
 
             <TextView
-                style="@style/detail_small_body"
-                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
-
-        </LinearLayout>
-
-
-        <LinearLayout style="@style/detail_ll">
-
-            <TextView
-                style="@style/detail_small_title"
-                android:text="企业阶段" />
-
-            <TextView
+                android:id="@+id/companyScopeLabel"
                 style="@style/detail_small_body"
                 android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
 
@@ -102,9 +96,24 @@
 
             <TextView
                 style="@style/detail_small_title"
-                android:text="企业员工" />
+                android:text="@string/companyStageLabel" />
 
             <TextView
+                android:id="@+id/companyStageLabel"
+                style="@style/detail_small_body"
+                android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
+
+        </LinearLayout>
+
+
+        <LinearLayout style="@style/detail_ll">
+
+            <TextView
+                style="@style/detail_small_title"
+                android:text="@string/companyManCountLabel" />
+
+            <TextView
+                android:id="@+id/companyManCountLabel"
                 style="@style/detail_small_body"
                 android:text="YYYYYYYYYYYYYYYYYYYYYYYY" />
 

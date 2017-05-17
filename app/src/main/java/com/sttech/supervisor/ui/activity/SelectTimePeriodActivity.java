@@ -76,13 +76,6 @@ public class SelectTimePeriodActivity extends TActivity implements View.OnClickL
 
     }
 
-
-    @Override
-    public void onCreateBinding() {
-
-    }
-
-
     @Override
     public void onClick(View view) {
         Bundle bundle = new Bundle();

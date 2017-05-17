@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.sttech.supervisor.R;
 import com.sttech.supervisor.utils.CommonUtils;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import es.dmoral.toasty.Toasty;
 
 /**
@@ -26,6 +28,7 @@ public abstract class TFragment extends Fragment {
 
 
     View rootView;
+    private Unbinder unbinder;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public abstract class TFragment extends Fragment {
             rootView = inflater.inflate(provideContentViewId(), container, false);
             initView(rootView);
         }
+        unbinder = ButterKnife.bind(this, rootView);
         return rootView;
     }
 
@@ -65,6 +69,7 @@ public abstract class TFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        unbinder.unbind();
     }
 
     public abstract int provideContentViewId();

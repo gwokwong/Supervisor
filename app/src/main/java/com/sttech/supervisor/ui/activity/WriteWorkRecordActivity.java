@@ -148,11 +148,6 @@ public class WriteWorkRecordActivity extends TActivity implements View.OnClickLi
     }
 
     @Override
-    public void onCreateBinding() {
-
-    }
-
-    @Override
     public void onClick(View view) {
         takePhoto();
     }

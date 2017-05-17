@@ -111,9 +111,5 @@ public class EndProjectActivity extends TActivity {
 
     }
 
-    @Override
-    public void onCreateBinding() {
-
-    }
 
 }

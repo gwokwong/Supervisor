@@ -1,6 +1,8 @@
 package com.sttech.supervisor.dto;
 
-public class MobileLoginResultDto extends AbstractMobileDto{
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
+public class MobileLoginResultDto{
 
 	private static final long serialVersionUID = 2627125330959605475L;
 	

@@ -12,13 +12,17 @@ import com.birbit.android.jobqueue.config.Configuration;
 import com.birbit.android.jobqueue.log.CustomLogger;
 import com.orhanobut.logger.Logger;
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.sql.language.Select;
+import com.sttech.supervisor.db.MobileLoginResult;
 import com.sttech.supervisor.http.HttpManager;
-import com.sttech.supervisor.utils.SpUtils;
 import com.sttech.supervisor.map.LocationService;
 import com.sttech.supervisor.task.Const;
 import com.sttech.supervisor.task.LocationSe;
 import com.sttech.supervisor.task.ProjectSe;
 import com.sttech.supervisor.task.TaskManager;
+import com.sttech.supervisor.utils.SpUtils;
+
+import java.util.List;
 
 public class MyApp extends Application {
 
@@ -128,8 +132,22 @@ public class MyApp extends Application {
     }
 
     public boolean isLogin() {
-        this.login = (boolean) SpUtils.get(Constant.SP_KEY_IS_LOGIN, false);  //TODO 模拟登录
-        return login;
+        List<MobileLoginResult> results = new Select().from(MobileLoginResult.class).queryList();
+//        if(results.size()>0){
+//
+//        }
+//
+//        List<Integer> uidList = new ArrayList<>();
+//        SQLCondition condition = Condition.column(Person_Table.uid.getNameAlias()).in(uidList);
+//        this.login = (boolean) SpUtils.get(Constant.SP_KEY_IS_LOGIN, false);  //TODO 模拟登录
+//        return login;
+
+        int mobileLoginResultSize = new Select().from(MobileLoginResult.class).queryList().size();
+
+        Logger.d("MobileLoginResult size --------------------->" + mobileLoginResultSize);
+//        Logger.d("MobileLoginResult value --------------------->" + results.get(0).toString());
+
+        return mobileLoginResultSize > 0;
     }
 
     public void setLogin(boolean login) {
@@ -141,4 +159,14 @@ public class MyApp extends Application {
      * 是否登录状态
      */
     public boolean login;
+
+    private String userId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }

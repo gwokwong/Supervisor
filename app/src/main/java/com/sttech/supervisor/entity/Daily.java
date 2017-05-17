@@ -1,6 +1,12 @@
 package com.sttech.supervisor.entity;
 
 
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.ModelContainer;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.sttech.supervisor.db.AppDatabase;
+
 import java.util.List;
 
 //import com.sttech.supervisor.BR;
@@ -9,6 +15,7 @@ import java.util.List;
  * Created by Eric on 15/6/6.
  */
 public class Daily  {
+
 
     private int id;
 

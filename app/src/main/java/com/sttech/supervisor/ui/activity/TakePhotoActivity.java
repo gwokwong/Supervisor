@@ -208,11 +208,6 @@ public class TakePhotoActivity extends TActivity {
 
 
     @Override
-    public void onCreateBinding() {
-
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
     }

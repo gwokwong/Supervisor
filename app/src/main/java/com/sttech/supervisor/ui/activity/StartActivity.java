@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 
 import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.Constant;
+import com.sttech.supervisor.MyApp;
 import com.sttech.supervisor.R;
 import com.sttech.supervisor.entity.Daily;
 import com.sttech.supervisor.http.HttpManager;
@@ -38,7 +39,7 @@ public class StartActivity extends TActivity {
         setContentView(R.layout.act_start);
         getPermission();
 //        initData();
-        test();
+//        test();
     }
 
     private void test() {
@@ -73,8 +74,10 @@ public class StartActivity extends TActivity {
 
     private void initData() {
         boolean isFirst = (boolean) SpUtils.get(Constant.SP_KEY_IS_FIRST, true);
-        boolean isLogin = (boolean) SpUtils.get(Constant.SP_KEY_IS_LOGIN, false);
-        if (isFirst && !isLogin) {
+//        boolean isLogin = (boolean) SpUtils.get(Constant.SP_KEY_IS_LOGIN, false);
+        boolean isLogin = MyApp.getInstance().isLogin();
+        Logger.d("isFirst|isLogin------>"+isFirst+":"+isLogin);
+        if (isFirst || !isLogin) {
             SignInActivity.start(this);
             finish();
         } else {
@@ -84,17 +87,6 @@ public class StartActivity extends TActivity {
     }
 
 //    private Daily daily;
-
-    @Override
-    public void onCreateBinding() {
-//        ActStartBinding binding = DataBindingUtil.setContentView(this,
-//                R.layout.act_start);
-//        getPermission();
-//        test();
-//        daily = new Daily();
-//        binding.setDaily(daily);
-
-    }
 
     private final int SDK_PERMISSION_REQUEST = 127;
 

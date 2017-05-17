@@ -16,16 +16,14 @@ import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.Constant;
 import com.sttech.supervisor.MyApp;
 import com.sttech.supervisor.R;
-import com.sttech.supervisor.db.LocationInfo;
+import com.sttech.supervisor.db.MobileLoginResult;
 import com.sttech.supervisor.http.HttpManager;
 import com.sttech.supervisor.http.callback.OnResultCallBack;
 import com.sttech.supervisor.http.subscriber.HttpSubscriber;
 import com.sttech.supervisor.ui.fragment.dialog.DialogFragmentHelper;
 import com.sttech.supervisor.utils.Base64Utils;
 import com.sttech.supervisor.utils.SpUtils;
-import com.sttech.supervisor.utils.StrUtils;
 
-import java.util.ArrayList;
 
 /**
  * function :登录界面
@@ -44,22 +42,8 @@ public class SignInActivity extends TActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_signin);
         initView();
-        LocationInfo info = new LocationInfo();
-        ArrayList<LocationInfo> list = new ArrayList<>();
-//        for (int i = 80; i < 119; i++) {
-//            info = new LocationInfo();
-//            info.name = "李四";
-//            info.latitude = 1231.3;
-//            info.lontitude = 123.44;
-//            info.time = System.currentTimeMillis();
-//            info.tryTimes = i;
-//            list.add(info);
-//        }
 ////实时保存，马上保存
 //        new SaveModelTransaction<>(ProcessModelInfo.withModels(list)).onExecute();
-
-//        TaskManager.getInstance().init(this).setAlarm();
-
     }
 
 
@@ -70,13 +54,10 @@ public class SignInActivity extends TActivity {
         passwordWrapper = findById(R.id.passwordWrapper);
 //        usernameWrapper.setHint("Username");
 //        passwordWrapper.setHint("Password");
-
+        usernameWrapper.getEditText().setText("opt_0215");
+        passwordWrapper.getEditText().setText("123456");
     }
 
-    @Override
-    public void onCreateBinding() {
-
-    }
 
     public void signInOnClick(View view) {
         if (view.getId() == R.id.sign_in) {
@@ -106,41 +87,39 @@ public class SignInActivity extends TActivity {
      * 验证基本信息
      */
     private void doValidate() {
-//        hideKeyboard();
-//        String username = usernameWrapper.getEditText().getText().toString();
-//        String password = passwordWrapper.getEditText().getText().toString();
-//        Logger.d("username password" + username + "|" + password);
-//        if (TextUtils.isEmpty(username)) {
-//            toaste("手机号码不能为空");
-//        } else if (!StrUtils.validatePhoneNumber(username)) {
+        hideKeyboard();
+        String username = usernameWrapper.getEditText().getText().toString();
+        String password = passwordWrapper.getEditText().getText().toString();
+        Logger.d("username password" + username + "|" + password);
+        if (TextUtils.isEmpty(username)) {
+            toaste("手机号码不能为空");
+        }
+
+//        else if (!StrUtils.validatePhoneNumber(username)) {
 //            Logger.d("!validateUserName");
 //            toaste("手机号码输入错误");
 //            usernameWrapper.setError("Not a valid email address!");
-//        } else if (TextUtils.isEmpty(password)) {
-//            toaste("密码不能为空");
-//        } else if (!validatePassword(password)) {
-//            Logger.d("!validatePassword");
-//            toaste("密码输入不正确");
-//            passwordWrapper.setError("Not a valid password!");
-//        } else {
-//            Logger.d("!setErrorEnabled");
-//            usernameWrapper.setErrorEnabled(false);
-//            passwordWrapper.setErrorEnabled(false);
-//            doLogin();
 //        }
 
-        doLogin();
-
+        else if (TextUtils.isEmpty(password)) {
+            toaste("密码不能为空");
+        } else if (!validatePassword(password)) {
+            Logger.d("!validatePassword");
+            toaste("密码输入不正确");
+            passwordWrapper.setError("Not a valid password!");
+        } else {
+            Logger.d("!setErrorEnabled");
+            usernameWrapper.setErrorEnabled(false);
+            passwordWrapper.setErrorEnabled(false);
+            doLogin(username, password);
+        }
     }
 
-    private void doLogin() {
-//        mDialogFragment = DialogFragmentHelper.showProgress(getSupportFragmentManager(), "正在加载中");
-//        h.sendEmptyMessageDelayed(0, 3000);
+    private void doLogin(String username, String password) {
         HttpSubscriber httpSubscriber = new HttpSubscriber(new OnResultCallBack<String>() {
 
             @Override
             public void onStart() {
-//                Logger.d("onStart");
                 mDialogFragment = DialogFragmentHelper.showProgress(getSupportFragmentManager(), "正在登录中...");
             }
 
@@ -148,11 +127,15 @@ public class SignInActivity extends TActivity {
             public void onSuccess(String data) {
                 Logger.d("onSuccess" + data);
                 toast(data);
-                //设计唯一的记录用户已登录
                 SpUtils.put(Constant.SP_KEY_IS_FIRST, false);
-//                MyApp.getInstance().setLogin(true);
                 SpUtils.put(Constant.SP_KEY_IS_LOGIN, true);
                 MainActivity.start(SignInActivity.this);
+                MobileLoginResult result = new MobileLoginResult();
+                result.setUserName("韦国旺");
+                result.setUserId("10010");
+                result.setCellPhone("18681529205");
+                result.save();
+                MyApp.getInstance().setUserId("10010");
                 finish();
             }
 
@@ -160,33 +143,16 @@ public class SignInActivity extends TActivity {
             public void onError(int code, String errorMsg) {
                 Logger.d("onError" + errorMsg);
                 toaste(errorMsg);
-                MainActivity.start(SignInActivity.this);
 
             }
 
             @Override
             public void onCompleted() {
-//                Logger.d("onCompleted");
                 mDialogFragment.dismiss();
             }
         });
 
-        HttpManager.getInstance().login(httpSubscriber, "opt_0215", Base64Utils.encryptBase64("123456"));
-
-
-//        HttpSubscriber httpSubscriber = new HttpSubscriber(new OnResultCallBack<Daily>() {
-//                            @Override
-//                            public void onSuccess(Daily daily) {
-//                                Logger.d("onSuccess" + daily.toString());
-//                                locationInfo.tryTimes = 82;
-//                                locationInfo.update();
-//                            }
-//
-//                            @Override
-//                            public void onError(int code, String errorMsg) {
-//                                Logger.d("onError: code:" + code + "  errorMsg:" + errorMsg);
-//                            }
-//                        });
+        HttpManager.getInstance().login(httpSubscriber, username, Base64Utils.encryptBase64(password));
     }
 
     Handler h = new Handler() {
