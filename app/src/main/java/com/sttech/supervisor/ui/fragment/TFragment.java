@@ -132,7 +132,8 @@ public abstract class TFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        unbinder.unbind();
+        if (unbinder != null)
+            unbinder.unbind();
     }
 
     public abstract int provideContentViewId();

@@ -12,7 +12,7 @@ public class Const {
     /**
      * 延迟启动时间
      */
-    public static int WAIT_TIME = 1 * 1000;
+    public static int WAIT_TIME = 0;
 
     /**
      * 定位上传任务时间间隔

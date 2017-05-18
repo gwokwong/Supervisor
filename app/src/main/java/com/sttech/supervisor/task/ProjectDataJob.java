@@ -7,6 +7,11 @@ import com.birbit.android.jobqueue.Job;
 import com.birbit.android.jobqueue.Params;
 import com.birbit.android.jobqueue.RetryConstraint;
 import com.orhanobut.logger.Logger;
+import com.raizlabs.android.dbflow.sql.language.Select;
+import com.sttech.supervisor.db.LocationInfo;
+import com.sttech.supervisor.db.LocationInfo_Table;
+
+import java.util.List;
 
 /**
  * function : 上传资料任务
@@ -34,6 +39,9 @@ public class ProjectDataJob extends Job {
 //        Logger.d("执行ProjectDataJobonRun");
         //查询本地数据库,将所有上传没有成功的项目资料都再次上传，策略，按时间排序先上传最新未上传成功的资料，再寻找以前的资料
         //每次最多启动5个请求。
+
+        List<LocationInfo> locationInfos = new Select().from(LocationInfo.class).where(LocationInfo_Table.tryTimes.lessThan(100)).queryList();
+
 
     }
 
