@@ -9,9 +9,15 @@ import com.birbit.android.jobqueue.Job;
 import com.birbit.android.jobqueue.Params;
 import com.birbit.android.jobqueue.RetryConstraint;
 import com.orhanobut.logger.Logger;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.sttech.supervisor.MyApp;
 import com.sttech.supervisor.db.LocationInfo;
+import com.sttech.supervisor.db.LocationInfo_Table;
 import com.sttech.supervisor.map.LocationService;
+
+import java.util.List;
+
+import static com.sttech.supervisor.task.Const.LOCATION_DELAY_TIME;
 
 /**
  * function : 定位任务
@@ -44,7 +50,7 @@ public class LocationJob extends Job {
 
     @Override
     public void onRun() throws Throwable {
-//        Logger.d("执行LocationJobonRun");
+        Logger.d("执行LocationJobonRun");
         locationService = ((MyApp) MyApp.getmContext()).locationService;
         mListener = new BDLocationListener() {
             @Override
@@ -69,6 +75,30 @@ public class LocationJob extends Job {
 //                    locationInfo.lontitude = location.getLongitude();
 //                    locationInfo.time = System.currentTimeMillis();
 //                    locationInfo.save();
+
+                    List<LocationInfo> locationInfos = SQLite.select()
+                            .from(LocationInfo.class).where().orderBy(LocationInfo_Table.time, false).queryList();  //false 为降序
+                    //TODO 判断程序启动时间
+                    long now = System.currentTimeMillis();
+                    if (locationInfos.size() > 0) {
+                        long time = locationInfos.get(0).time - now;
+                        if (time > 4 * 60 * 1000) {
+                            LocationInfo locationInfo = new LocationInfo();
+                            locationInfo.name = "机主";
+                            locationInfo.tryTimes = 0;
+                            locationInfo.time = now;
+                            locationInfo.save();
+                        } else {
+                            Logger.d("事件间隔未到" + TRY_TIMES);
+                        }
+                    } else {
+                        LocationInfo locationInfo = new LocationInfo();
+                        locationInfo.name = "机主";
+                        locationInfo.tryTimes = 0;
+                        locationInfo.time = now;
+                        locationInfo.save();
+                        Logger.d("执行");
+                    }
 
 
                     //TODO 发送之前的位置记录
@@ -108,15 +138,30 @@ public class LocationJob extends Job {
                     if (++TRY_TIMES >= MAX_TRY_TIME) {
                         locationService.unregisterListener(mListener);
                         locationService.destroy();
-                        //TODO  定位失败记录在数据库 最后一次尝试的时候记录
-                        if (System.currentTimeMillis() - last_location_time > 5 * 60 * 1000) {
+//                        //TODO  定位失败记录在数据库 最后一次尝试的时候记录
+//                        if (System.currentTimeMillis() - last_location_time > 5 * 60 * 1000) {
+//                            LocationInfo locationInfo = new LocationInfo();
+//                            locationInfo.name = "机主";
+//                            locationInfo.tryTimes = 0;
+//                            locationInfo.time = System.currentTimeMillis();
+//                            locationInfo.save();
+//                        }
+
+                        List<LocationInfo> locationInfos = SQLite.select()
+                                .from(LocationInfo.class).where().orderBy(LocationInfo_Table.time, false).queryList();  //false 为降序
+
+                        long now = System.currentTimeMillis();
+                        long time = locationInfos.get(0).time - now;
+                        if (time > LOCATION_DELAY_TIME - 5000) {
                             LocationInfo locationInfo = new LocationInfo();
                             locationInfo.name = "机主";
                             locationInfo.tryTimes = 0;
                             locationInfo.time = System.currentTimeMillis();
                             locationInfo.save();
-                        }
+                        } else {
+                            Logger.d("事件间隔未到" + TRY_TIMES);
 
+                        }
                     }
                 }
             }

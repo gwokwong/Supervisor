@@ -8,20 +8,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.Constant;
 import com.sttech.supervisor.MyApp;
 import com.sttech.supervisor.R;
-import com.sttech.supervisor.http.HttpManager;
 import com.sttech.supervisor.ui.fragment.dialog.CommonDialogFragment;
 import com.sttech.supervisor.ui.fragment.dialog.DialogFragmentHelper;
 import com.sttech.supervisor.ui.fragment.dialog.IDialogResultListener;
 import com.sttech.supervisor.utils.SpUtils;
 
 import java.util.ArrayList;
-
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 
 /**
  * function : 启动界面
@@ -37,45 +32,11 @@ public class StartActivity extends TActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_start);
         getPermission();
-//        initData();
-//        test();
     }
-
-//    private void test() {
-//        Observer<Daily> dailyObserver = new Observer<Daily>() {
-//            @Override
-//            public void onSubscribe(Disposable d) {
-//                Logger.d("onSubscribe");
-//
-//            }
-//
-//            @Override
-//            public void onNext(Daily daily) {
-//                toaste(daily.toString());
-//                Logger.d("onNext");
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                Logger.d("onError");
-//
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//                Logger.d("onComplete");
-//
-//            }
-//        };
-//        HttpManager.getInstance().getDaily(dailyObserver);
-//
-//    }
 
     private void initData() {
         boolean isFirst = (boolean) SpUtils.get(Constant.SP_KEY_IS_FIRST, true);
-//        boolean isLogin = (boolean) SpUtils.get(Constant.SP_KEY_IS_LOGIN, false);
         boolean isLogin = MyApp.getInstance().isLogin();
-        Logger.d("isFirst|isLogin------>"+isFirst+":"+isLogin);
         if (isFirst || !isLogin) {
             SignInActivity.start(this);
             finish();
@@ -84,8 +45,6 @@ public class StartActivity extends TActivity {
             finish();
         }
     }
-
-//    private Daily daily;
 
     private final int SDK_PERMISSION_REQUEST = 127;
 
