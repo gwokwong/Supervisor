@@ -129,7 +129,7 @@ public class ListImageDtoAdapter extends RecyclerView.Adapter<ListImageDtoAdapte
 //            });
         viewHolder.ll_del.setVisibility(View.GONE);
 //        } else {
-        Logger.d("NO TYPE_CAMERA");
+//        Logger.d("NO TYPE_CAMERA");
 //            viewHolder.ll_del.setVisibility(View.VISIBLE);
 //            viewHolder.ll_del.setOnClickListener(new View.OnClickListener() {
 //                @Override
