@@ -3,7 +3,7 @@ package com.sttech.supervisor.http.cache;
 
 import com.sttech.supervisor.dto.MobileResponse;
 import com.sttech.supervisor.dto.ProjectPageDto;
-import com.sttech.supervisor.entity.Daily;
+//import com.sttech.supervisor.entity.Daily;
 
 import java.util.concurrent.TimeUnit;
 

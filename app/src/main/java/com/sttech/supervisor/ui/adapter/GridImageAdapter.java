@@ -9,11 +9,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.R;
-import com.sttech.supervisor.entity.LocalMedia;
+import com.sttech.supervisor.dto.ImageDto;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class GridImageAdapter extends RecyclerView.Adapter<GridImageAdapter.View
     public final int TYPE_PICTURE = 2;
     private LayoutInflater mInflater;
     private Context mContext;
-    private List<LocalMedia> list = new ArrayList<>();
+    private List<ImageDto> list = new ArrayList<>();
     private int selectMax = 9;
     /**
      * 点击添加图片跳转
@@ -51,7 +51,7 @@ public class GridImageAdapter extends RecyclerView.Adapter<GridImageAdapter.View
         this.selectMax = selectMax;
     }
 
-    public void setList(List<LocalMedia> list) {
+    public void setList(List<ImageDto> list) {
         this.list = list;
     }
 
@@ -135,21 +135,27 @@ public class GridImageAdapter extends RecyclerView.Adapter<GridImageAdapter.View
                     mOnAddPicClickListener.onAddPicClick(1, viewHolder.getAdapterPosition());
                 }
             });
-            LocalMedia media = list.get(position);
-            int type = media.getType();
-            String path = "";
-            if (media.isCut() && !media.isCompressed()) {
-                // 裁剪过
-                path = media.getCutPath();
-            } else if (media.isCompressed() || (media.isCut() && media.isCompressed())) {
-                // 压缩过,或者裁剪同时压缩过,以最终压缩过图片为准
-                path = media.getCompressPath();
-            } else {
-                // 原图
-                path = media.getPath();
-            }
+//            LocalMedia media = list.get(position);
+//            int type = media.getType();
+//            String path = "";
+//            if (media.isCut() && !media.isCompressed()) {
+//                // 裁剪过
+//                path = media.getCutPath();
+//            } else if (media.isCompressed() || (media.isCut() && media.isCompressed())) {
+//                // 压缩过,或者裁剪同时压缩过,以最终压缩过图片为准
+//                path = media.getCompressPath();
+//            } else {
+//                // 原图
+//                path = media.getPath();
+//            }
 
-            Glide.with(mContext).load(new File(path))
+
+            ImageDto imageDto = list.get(position);
+            Glide.with(mContext)
+                    .load(imageDto.getPath())
+                    .asBitmap().centerCrop()
+                    .placeholder(R.mipmap.default_img)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(viewHolder.mImg);
 
 //            switch (type) {

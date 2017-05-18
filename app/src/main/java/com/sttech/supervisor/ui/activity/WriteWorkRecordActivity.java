@@ -14,8 +14,8 @@ import android.widget.Button;
 import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.Constant;
 import com.sttech.supervisor.R;
+import com.sttech.supervisor.dto.ImageDto;
 import com.sttech.supervisor.ui.adapter.GridImageAdapter;
-import com.sttech.supervisor.entity.LocalMedia;
 import com.sttech.supervisor.ui.widget.FullyGridLayoutManager;
 
 import java.io.File;
@@ -86,25 +86,43 @@ public class WriteWorkRecordActivity extends TActivity implements View.OnClickLi
         });
     }
 
+//    /**
+//     * 外部图片预览
+//     *
+//     * @param position
+//     * @param medias
+//     */
+//    public void externalPicturePreview(Context mContext, int position, List<LocalMedia> medias) {
+//        if (medias != null && medias.size() > 0) {
+//            Intent intent = new Intent();
+//            intent.putExtra(Constant.EXTRA_PREVIEW_SELECT_LIST, (Serializable) medias);
+//            intent.putExtra(Constant.EXTRA_PREVIEW_POSITION, position);
+//            intent.setClass(mContext, PictureExternalPreviewActivity.class);
+//            mContext.startActivity(intent);
+//            ((Activity) mContext).overridePendingTransition(R.anim.toast_enter, 0);
+//        }
+//    }
+
+
     /**
      * 外部图片预览
      *
      * @param position
-     * @param medias
+     * @param imageDtos
      */
-    public void externalPicturePreview(Context mContext, int position, List<LocalMedia> medias) {
-        if (medias != null && medias.size() > 0) {
+    public void externalPicturePreview(Context mContext, int position, List<ImageDto> imageDtos) {
+        if (imageDtos != null && imageDtos.size() > 0) {
             Intent intent = new Intent();
-            intent.putExtra(Constant.EXTRA_PREVIEW_SELECT_LIST, (Serializable) medias);
+            intent.putExtra(Constant.EXTRA_PREVIEW_SELECT_LIST, (Serializable) imageDtos);
             intent.putExtra(Constant.EXTRA_PREVIEW_POSITION, position);
-            intent.setClass(mContext, PictureExternalPreviewActivity.class);
+            intent.setClass(mContext, PicturePreviewActivity.class);
             mContext.startActivity(intent);
             ((Activity) mContext).overridePendingTransition(R.anim.toast_enter, 0);
         }
     }
 
 
-    private List<LocalMedia> selectMedia = new ArrayList<>();
+    private List<ImageDto> selectMedia = new ArrayList<>();
 
     private GridImageAdapter.onAddPicClickListener onAddPicClickListener = new GridImageAdapter.onAddPicClickListener() {
         @Override
@@ -134,7 +152,7 @@ public class WriteWorkRecordActivity extends TActivity implements View.OnClickLi
 //                BitmapFactory.Options options = new BitmapFactory.Options();
 //                options.inSampleSize = 2;
 //                Bitmap bm = BitmapFactory.decodeFile(myJpgPath, options);
-                selectMedia.add(new LocalMedia(myJpgPath));
+                selectMedia.add(new ImageDto("", myJpgPath));
                 adapter.notifyDataSetChanged();
 
 

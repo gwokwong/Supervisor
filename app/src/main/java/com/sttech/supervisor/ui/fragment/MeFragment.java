@@ -62,31 +62,46 @@ public class MeFragment extends TFragment implements View.OnClickListener {
     @BindView(R.id.me_name)
     TextView nameTv;
 
-    private TextView jobTv, mobilephoneTv;
+    @BindView(R.id.me_job)
+    TextView jobTv;
 
-    private Button logoutBtn;
-    private LinearLayout msgll, endProjectll, sendErrorll;
-    private TextView msgCountTv, sendFailCountTv;
+    @BindView(R.id.me_mobile_phone)
+    TextView mobilephoneTv;
+
+    @BindView(R.id.me_logout_btn)
+    Button logoutBtn;
+
+    @BindView(R.id.me_msg)
+    LinearLayout msgll;
+
+    @BindView(R.id.me_end_project)
+    LinearLayout endProjectll;
+
+    @BindView(R.id.me_send_error)
+    LinearLayout sendErrorll;
+
+    @BindView(R.id.me_msg_count)
+    TextView msgCountTv;
+
+    @BindView(R.id.me_send_fail_count)
+    TextView sendFailCountTv;
 
     @Override
     public void initView(View view) {
 //        headImg = (RoundedImageView) view.findViewById(R.id.me_head);
 //        nameTv = (TextView) view.findViewById(R.id.me_name);
-        jobTv = (TextView) view.findViewById(R.id.me_job);
-        mobilephoneTv = (TextView) view.findViewById(R.id.me_mobile_phone);
-        logoutBtn = (Button) view.findViewById(R.id.me_logout_btn);
-        msgll = (LinearLayout) view.findViewById(R.id.me_msg);
-        endProjectll = (LinearLayout) view.findViewById(R.id.me_end_project);
-        sendErrorll = (LinearLayout) view.findViewById(R.id.me_send_error);
-        msgCountTv = (TextView) view.findViewById(R.id.me_msg_count);
-        sendFailCountTv = (TextView) view.findViewById(R.id.me_send_fail_count);
+//        jobTv = (TextView) view.findViewById(R.id.me_job);
+//        mobilephoneTv = (TextView) view.findViewById(R.id.me_mobile_phone);
+//        logoutBtn = (Button) view.findViewById(R.id.me_logout_btn);
+//        msgll = (LinearLayout) view.findViewById(R.id.me_msg);
+//        endProjectll = (LinearLayout) view.findViewById(R.id.me_end_project);
+//        sendErrorll = (LinearLayout) view.findViewById(R.id.me_send_error);
+//        msgCountTv = (TextView) view.findViewById(R.id.me_msg_count);
+//        sendFailCountTv = (TextView) view.findViewById(R.id.me_send_fail_count);
 
 //        msgCountTv.setText("1000");
 
-        logoutBtn.setOnClickListener(this);
-        msgll.setOnClickListener(this);
-        endProjectll.setOnClickListener(this);
-        sendErrorll.setOnClickListener(this);
+
 
         MobileLoginResult result = new Select().from(MobileLoginResult.class).querySingle();
 //        Glide.with(getActivity())
@@ -113,6 +128,13 @@ public class MeFragment extends TFragment implements View.OnClickListener {
 
     @Override
     public void initData() {
+
+        logoutBtn.setOnClickListener(this);
+        msgll.setOnClickListener(this);
+        endProjectll.setOnClickListener(this);
+        sendErrorll.setOnClickListener(this);
+
+
         MobileLoginResult result = new Select().from(MobileLoginResult.class).querySingle();
         nameTv.setText(result.getUserName());
         Glide.with(getActivity())
@@ -147,7 +169,6 @@ public class MeFragment extends TFragment implements View.OnClickListener {
 //            Delete.table(MobileLoginResult.class).(condition);
 
 
-
             Intent intent = new Intent(getActivity(), SignInActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
 
@@ -159,6 +180,17 @@ public class MeFragment extends TFragment implements View.OnClickListener {
             EndProjectActivity.start(getActivity());
         } else if (view == sendErrorll) {
             SendMsgFailActivity.start(getActivity());
+        }
+    }
+
+    private static int count = 0;
+
+    @Override
+    protected void onFragmentVisibleChange(boolean isVisible) {
+        super.onFragmentVisibleChange(isVisible);
+        if (isVisible) {
+            sendFailCountTv.setText(String.valueOf(++count));
+            msgCountTv.setText(String.valueOf(++count));
         }
     }
 }

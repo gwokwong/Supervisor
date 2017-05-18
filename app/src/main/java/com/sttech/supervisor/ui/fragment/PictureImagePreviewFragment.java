@@ -17,7 +17,6 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.sttech.supervisor.Constant;
 import com.sttech.supervisor.R;
 import com.sttech.supervisor.dto.ImageDto;
-import com.sttech.supervisor.entity.LocalMedia;
 
 import java.io.Serializable;
 import java.util.ArrayList;

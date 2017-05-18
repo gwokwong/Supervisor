@@ -11,10 +11,7 @@ import com.birbit.android.jobqueue.RetryConstraint;
 import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.MyApp;
 import com.sttech.supervisor.db.LocationInfo;
-import com.sttech.supervisor.event.MeEvent;
 import com.sttech.supervisor.map.LocationService;
-
-import de.greenrobot.event.EventBus;
 
 /**
  * function : 定位任务
@@ -65,17 +62,19 @@ public class LocationJob extends Job {
                     sb.append(location.getCity());
 //                    Logger.d("LocationJob定位成功" + sb);
 
-                    LocationInfo locationInfo = new LocationInfo();
-                    locationInfo.latitude = location.getLatitude();
-                    locationInfo.lontitude = location.getLongitude();
-                    locationInfo.time = System.currentTimeMillis();
-                    locationInfo.save();
+                    //TODO 判断和上次发送成功相差是否超过5分钟，如果超过就可以再次发送
+
+//                    LocationInfo locationInfo = new LocationInfo();
+//                    locationInfo.latitude = location.getLatitude();
+//                    locationInfo.lontitude = location.getLongitude();
+//                    locationInfo.time = System.currentTimeMillis();
+//                    locationInfo.save();
 
 
                     //TODO 发送之前的位置记录
 //                    List<LocationInfo> locationInfos = new Select().from(LocationInfo.class).where(LocationInfo_Table.tryTimes.lessThan(100)).queryList();
 
-                    EventBus.getDefault().post(new MeEvent(MeEvent.TYPE_MY_MSG, 15));
+//                    EventBus.getDefault().post(new MeEvent(MeEvent.TYPE_MY_MSG, 15));
 //
 //                    if (locationInfos.size() > 0) {
 //                        Logger.d("locationInfos.size() > 0)->" + locationInfos.size());
@@ -101,8 +100,9 @@ public class LocationJob extends Job {
 //                    }
                     locationService.unregisterListener(mListener);
                     locationService.destroy();
+
                 } else {
-                    //连续几次定位都失败，尝试最大次数后记录到数据库
+                    //TODO 连续几次定位都失败，尝试最大次数后记录到数据库
                     last_location_time = System.currentTimeMillis();
                     Logger.d("LocationJob定位失败" + TRY_TIMES);
                     if (++TRY_TIMES >= MAX_TRY_TIME) {

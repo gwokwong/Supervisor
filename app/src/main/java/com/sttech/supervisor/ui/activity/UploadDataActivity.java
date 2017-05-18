@@ -11,7 +11,6 @@ import com.sttech.supervisor.R;
 import com.sttech.supervisor.dto.PageDto;
 import com.sttech.supervisor.dto.ProjectAttachDto;
 import com.sttech.supervisor.ui.adapter.ProjectDataListAdapter;
-import com.sttech.supervisor.entity.ProjectData;
 import com.sttech.supervisor.ui.widget.SpacesItemDecoration;
 import com.sttech.supervisor.ui.widget.xrecyclerview.RecyclerItemCallback;
 import com.sttech.supervisor.ui.widget.xrecyclerview.XRecyclerView;

@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.sttech.supervisor.R;
 import com.sttech.supervisor.dto.ProjectListDto;
-import com.sttech.supervisor.entity.Project;
+//import com.sttech.supervisor.entity.Project;
 import com.sttech.supervisor.ui.widget.xrecyclerview.RecyclerAdapter;
 
 import java.util.List;

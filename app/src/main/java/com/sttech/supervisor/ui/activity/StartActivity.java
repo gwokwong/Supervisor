@@ -12,7 +12,6 @@ import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.Constant;
 import com.sttech.supervisor.MyApp;
 import com.sttech.supervisor.R;
-import com.sttech.supervisor.entity.Daily;
 import com.sttech.supervisor.http.HttpManager;
 import com.sttech.supervisor.ui.fragment.dialog.CommonDialogFragment;
 import com.sttech.supervisor.ui.fragment.dialog.DialogFragmentHelper;
@@ -42,35 +41,35 @@ public class StartActivity extends TActivity {
 //        test();
     }
 
-    private void test() {
-        Observer<Daily> dailyObserver = new Observer<Daily>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-                Logger.d("onSubscribe");
-
-            }
-
-            @Override
-            public void onNext(Daily daily) {
-                toaste(daily.toString());
-                Logger.d("onNext");
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Logger.d("onError");
-
-            }
-
-            @Override
-            public void onComplete() {
-                Logger.d("onComplete");
-
-            }
-        };
-        HttpManager.getInstance().getDaily(dailyObserver);
-
-    }
+//    private void test() {
+//        Observer<Daily> dailyObserver = new Observer<Daily>() {
+//            @Override
+//            public void onSubscribe(Disposable d) {
+//                Logger.d("onSubscribe");
+//
+//            }
+//
+//            @Override
+//            public void onNext(Daily daily) {
+//                toaste(daily.toString());
+//                Logger.d("onNext");
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//                Logger.d("onError");
+//
+//            }
+//
+//            @Override
+//            public void onComplete() {
+//                Logger.d("onComplete");
+//
+//            }
+//        };
+//        HttpManager.getInstance().getDaily(dailyObserver);
+//
+//    }
 
     private void initData() {
         boolean isFirst = (boolean) SpUtils.get(Constant.SP_KEY_IS_FIRST, true);

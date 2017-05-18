@@ -186,8 +186,6 @@ public class CrashHandler implements UncaughtExceptionHandler {
         }
         str = str.substring(1);
         Log.i("socket_client", str);
-//        new Thread(new Thread2(str)).start();
-
         return fileName;
 
     }

@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.sttech.supervisor.Constant;
 import com.sttech.supervisor.R;
 import com.sttech.supervisor.dto.ImageDto;
-import com.sttech.supervisor.entity.LocalMedia;
 import com.sttech.supervisor.ui.fragment.PictureImagePreviewFragment;
 import com.sttech.supervisor.ui.widget.PreviewViewPager;
 

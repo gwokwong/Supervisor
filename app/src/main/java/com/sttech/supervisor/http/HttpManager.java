@@ -7,7 +7,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.sttech.supervisor.Constant;
 import com.sttech.supervisor.dto.MobileResponse;
 import com.sttech.supervisor.dto.ProjectPageDto;
-import com.sttech.supervisor.entity.Daily;
+//import com.sttech.supervisor.entity.Daily;
 import com.sttech.supervisor.http.api.RestApi;
 import com.sttech.supervisor.http.cache.CacheProvider;
 import com.sttech.supervisor.http.cookies.NovateCookieManger;
@@ -149,11 +149,11 @@ public class HttpManager {
 //        toSubscribe(mRestApi.getDatas(pno, ps, dtype), subscriber);
 //    }
 
-    public void getDaily(Observer<Daily> subscriber) {
-//        mRestApi.getDaily().subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(subscriber);
-    }
+//    public void getDaily(Observer<Daily> subscriber) {
+////        mRestApi.getDaily().subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
+////                .observeOn(AndroidSchedulers.mainThread())
+////                .subscribe(subscriber);
+//    }
 
     /**
      * 登录

@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.sttech.supervisor.R;
 import com.sttech.supervisor.dto.ProjectAttachDto;
-import com.sttech.supervisor.entity.ProjectData;
+//import com.sttech.supervisor.entity.ProjectData;
 import com.sttech.supervisor.ui.adapter.ProjectDataListAdapter;
 import com.sttech.supervisor.ui.fragment.TFragment;
 import com.sttech.supervisor.ui.widget.AdvanceDecoration;

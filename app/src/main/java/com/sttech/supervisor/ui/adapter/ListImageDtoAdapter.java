@@ -13,7 +13,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.R;
 import com.sttech.supervisor.dto.ImageDto;
-import com.sttech.supervisor.entity.LocalMedia;
 
 import java.io.File;
 import java.util.ArrayList;

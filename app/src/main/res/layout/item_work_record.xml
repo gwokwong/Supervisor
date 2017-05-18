@@ -48,7 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="20px"
         android:layout_toLeftOf="@+id/time"
-        android:text="@string/date_simple" />
+        android:text="@string/date_simple"
+        android:visibility="gone"/>
 
 
     <TextView

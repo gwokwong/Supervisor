@@ -5,9 +5,10 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.raizlabs.android.dbflow.sql.language.Select;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.sttech.supervisor.R;
 import com.sttech.supervisor.db.LocationInfo;
+import com.sttech.supervisor.db.LocationInfo_Table;
 import com.sttech.supervisor.entity.NoticeMsg;
 import com.sttech.supervisor.ui.adapter.BaseRecyclerAdapter;
 import com.sttech.supervisor.ui.adapter.BaseRecyclerHolder;
@@ -37,7 +38,13 @@ public class LocalFragment extends TFragment {
     @Override
     public void initData() {
         noticeMsgList = new ArrayList<>();
-        List<LocationInfo> locationInfos = new Select().from(LocationInfo.class).queryList();
+//        List<LocationInfo> locationInfos = new Select().from(LocationInfo.class).queryList();
+        List<LocationInfo> locationInfos = SQLite.select()
+                .from(LocationInfo.class)
+                .where()
+                .orderBy(LocationInfo_Table.time, false).queryList();  //false 为降序
+
+
         for (int i = 0; i < locationInfos.size(); i++) {
             noticeMsgList.add(new NoticeMsg("发送失败",
                     DateUtils.getFormatDateTime(new Date(locationInfos.get(i).time), "MM月dd日"),

@@ -91,7 +91,6 @@ public class SignInActivity extends TActivity {
         hideKeyboard();
         String username = usernameWrapper.getEditText().getText().toString();
         String password = passwordWrapper.getEditText().getText().toString();
-        Logger.d("username password" + username + "|" + password);
         if (TextUtils.isEmpty(username)) {
             toaste("手机号码不能为空");
         }
@@ -105,11 +104,9 @@ public class SignInActivity extends TActivity {
         else if (TextUtils.isEmpty(password)) {
             toaste("密码不能为空");
         } else if (!validatePassword(password)) {
-            Logger.d("!validatePassword");
             toaste("密码输入不正确");
             passwordWrapper.setError("Not a valid password!");
         } else {
-            Logger.d("!setErrorEnabled");
             usernameWrapper.setErrorEnabled(false);
             passwordWrapper.setErrorEnabled(false);
             doLogin(username, password);

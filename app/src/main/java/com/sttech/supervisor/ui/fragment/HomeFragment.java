@@ -26,7 +26,6 @@ import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.MyApp;
 import com.sttech.supervisor.R;
 import com.sttech.supervisor.dto.ProjectListDto;
-import com.sttech.supervisor.entity.Project;
 import com.sttech.supervisor.http.HttpManager;
 import com.sttech.supervisor.http.callback.OnResultCallBack;
 import com.sttech.supervisor.http.subscriber.HttpSubscriber;
