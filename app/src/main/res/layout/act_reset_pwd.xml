@@ -33,6 +33,7 @@
     </LinearLayout>
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/passwordWrapper"
         android:layout_width="match_parent"
         android:layout_height="@dimen/sign_text_input_height"
         android:layout_marginLeft="@dimen/sign_margin_left_right"
@@ -47,6 +48,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/passwordAgainWrapper"
         android:layout_width="match_parent"
         android:layout_height="@dimen/sign_text_input_height"
         android:layout_marginLeft="@dimen/sign_margin_left_right"
@@ -68,7 +70,7 @@
         android:layout_marginLeft="@dimen/sign_margin_left_right"
         android:layout_marginRight="@dimen/sign_margin_left_right"
         android:layout_marginTop="30px"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/sele_common_btn"
         android:onClick="resetOnClick"
         android:text="@string/sign_in"
         android:textColor="@android:color/white"

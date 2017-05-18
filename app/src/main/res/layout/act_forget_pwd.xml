@@ -69,7 +69,7 @@
         android:layout_marginLeft="@dimen/sign_margin_left_right"
         android:layout_marginRight="@dimen/sign_margin_left_right"
         android:layout_marginTop="30px"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/sele_common_btn"
         android:onClick="forgetOnClick"
         android:text="@string/next"
         android:textColor="@android:color/white"

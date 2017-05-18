@@ -4,14 +4,12 @@ package com.sttech.supervisor.http.api;
 import com.sttech.supervisor.dto.MessageDto;
 import com.sttech.supervisor.dto.MobileResponse;
 import com.sttech.supervisor.dto.ProjectPageDto;
-import com.sttech.supervisor.entity.Daily;
 
 import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
@@ -38,7 +36,6 @@ public interface RestApi {
     @POST("data/location")
     Observable<MobileResponse<String>> getLocation();
 
-
     /**
      * 我的消息
      *
@@ -46,7 +43,6 @@ public interface RestApi {
      */
     @POST("data/message")
     Observable<MobileResponse<List<MessageDto>>> getMessage();
-
 
     /**
      * 项目详情
@@ -57,18 +53,33 @@ public interface RestApi {
     @POST("data/projectDetail")
     Observable<MobileResponse<ProjectPageDto>> projectDetail(@Field("projectId") String projectId);
 
+    /**
+     * 发送验证码
+     *
+     * @param cellPhone
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("data/sendVerificationCode")
+    Observable<MobileResponse<String>> sendVerificationCode(@Field("cellPhone") String cellPhone);
 
-//    @FormUrlEncoded
+    /**
+     * 重置密码
+     *
+     * @param cellPhone
+     * @param newPassword
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("data/resetPwd")
+    Observable<MobileResponse<String>> resetPwd(@Field("cellPhone") String cellPhone, @Field("newPassword")String newPassword );
+
+    //    @FormUrlEncoded
 //    @POST("query?key=7c2d1da3b8634a2b9fe8848c3a9edcba")
 //    Observable<ApiResponse<TestBean>> getDatas(@Field("pno") int pno, @Field("ps") int ps, @Field("dtype") String dtype);
 //
 //    @GET("news/latest")
 //
-
-    @FormUrlEncoded
-    @POST("data/projectDetail")
-    Observable<MobileResponse<ProjectPageDto>> getProjectList();
-
 
 //
 //    @POST("{url}")

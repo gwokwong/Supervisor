@@ -176,6 +176,29 @@ public class HttpManager {
     }
 
     /**
+     * 发送验证码
+     *
+     * @param subscriber
+     * @param cellPhone
+     */
+    public void sendVerificationCode(Observer<String> subscriber, String cellPhone) {
+        toSubscribe(mRestApi.sendVerificationCode(cellPhone), subscriber);
+    }
+
+
+    /**
+     * 重置密码
+     *
+     * @param subscriber
+     * @param cellPhone
+     * @param newPassword
+     */
+    public void resetPwd(Observer<String> subscriber, String cellPhone, String newPassword) {
+        toSubscribe(mRestApi.resetPwd(cellPhone, newPassword), subscriber);
+    }
+
+
+    /**
      * 项目详情
      *
      * @param subscriber
