@@ -5,7 +5,9 @@ import android.util.Log;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.sttech.supervisor.Constant;
+import com.sttech.supervisor.dto.ImageDto;
 import com.sttech.supervisor.dto.MobileResponse;
+import com.sttech.supervisor.dto.ProjectAttachDto;
 import com.sttech.supervisor.dto.ProjectPageDto;
 //import com.sttech.supervisor.entity.Daily;
 import com.sttech.supervisor.http.api.RestApi;
@@ -13,6 +15,10 @@ import com.sttech.supervisor.http.cache.CacheProvider;
 import com.sttech.supervisor.http.cookies.NovateCookieManger;
 import com.sttech.supervisor.http.exception.ApiException;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -25,10 +31,14 @@ import io.rx_cache2.DynamicKey;
 import io.rx_cache2.EvictDynamicKey;
 import io.rx_cache2.internal.RxCache;
 import io.victoralbertos.jolyglot.GsonSpeaker;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
 
 public class HttpManager {
     public static final String TAG = HttpManager.class.getSimpleName();
@@ -205,6 +215,72 @@ public class HttpManager {
      */
     public void getProjectDetail(Observer<ProjectPageDto> subscriber, String projectId) {
         toSubscribe(cacheProvider.getProjectDetail(mRestApi.projectDetail(projectId), new EvictDynamicKey(true), new DynamicKey(projectId)), subscriber);
+    }
+
+
+    /**
+     * 上传位置信息
+     *
+     * @param subscriber
+     * @param latitude
+     * @param lontitude
+     */
+    public void uploadLocation(Observer<String> subscriber, double latitude, double lontitude) {
+        toSubscribe(mRestApi.uploadLocation(latitude, lontitude), subscriber);
+    }
+
+
+    private static final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/*");
+
+    /**
+     * 上传项目资料
+     *
+     * @param subscriber
+     * @param projectAttachDto
+     */
+    public void uploadProjectAttach(Observer<String> subscriber, ProjectAttachDto projectAttachDto) {
+        Map<String, RequestBody> param = new HashMap<>();
+
+        param.put("createUserId", toRequestBodyOfText(projectAttachDto.getCreateUserId()));
+        param.put("createUserName", toRequestBodyOfText(projectAttachDto.getCreateUserName()));
+        param.put("createTime", toRequestBodyOfText(projectAttachDto.getCreateTime()));
+        param.put("createUserAvatarPath", toRequestBodyOfText(projectAttachDto.getCreateUserAvatarPath()));
+        param.put("categoryLabel", toRequestBodyOfText(projectAttachDto.getCategoryLabel()));
+        param.put("content", toRequestBodyOfText(projectAttachDto.getContent()));
+
+        List<ImageDto> imageList = projectAttachDto.getImageList();
+        int imageListSize = imageList.size();
+        if (imageListSize > 0) {
+//            for (ImageDto imageDto : imageList) {
+//                File f = new File(imageDto.getPath());
+//                RequestBody _requestBody = toRequestBodyOfImage(f);
+//                param.put("file\"; filename=\"" + f.getName() + "", _requestBody);
+//            }
+
+            for (int i = 0; i < imageListSize; i++) {
+                File f = new File(imageList.get(i).getPath());
+                RequestBody _requestBody = toRequestBodyOfImage(f);
+                param.put("file\"; filename=\"" + f.getName() + "", _requestBody);
+
+            }
+        }
+
+
+        toSubscribe(mRestApi.uploadProjectAttach(param), subscriber);
+    }
+
+
+    public static RequestBody toRequestBodyOfText(String value) {
+        RequestBody body = RequestBody.create(MediaType.parse("text/plain"), value);
+        return body;
+    }
+
+    public static RequestBody toRequestBodyOfImage(File pFile) {
+        RequestBody fileBody = RequestBody.create(MediaType.parse("image/*"), pFile);
+
+//        new MultipartBody.Builder().setType(MultipartBody.FORM)
+//                        .addFormDataPart("file", f.getName(), RequestBody.create(MEDIA_TYPE_PNG, f));
+        return fileBody;
     }
 
 

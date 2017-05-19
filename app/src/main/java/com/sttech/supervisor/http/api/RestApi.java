@@ -6,11 +6,16 @@ import com.sttech.supervisor.dto.MobileResponse;
 import com.sttech.supervisor.dto.ProjectPageDto;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PartMap;
 
 /**
  * 请求接口配置
@@ -72,7 +77,40 @@ public interface RestApi {
      */
     @FormUrlEncoded
     @POST("data/resetPwd")
-    Observable<MobileResponse<String>> resetPwd(@Field("cellPhone") String cellPhone, @Field("newPassword")String newPassword );
+    Observable<MobileResponse<String>> resetPwd(@Field("cellPhone") String cellPhone, @Field("newPassword") String newPassword);
+
+
+    /**
+     * 上传 位置信息
+     *
+     * @param latitude  经度
+     * @param lontitude 纬度
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("data/uploadLocation")
+    Observable<MobileResponse<String>> uploadLocation(@Field("latitude") double latitude, @Field("lontitude") double lontitude);
+
+
+//    /**
+//     * 上传 项目资料
+//     *
+//     * @param param
+//     * @param files
+//     * @return
+//     */
+
+    /**
+     * 上传 项目资料
+     *
+     * @param params
+     * @return
+     */
+    @Multipart
+    @POST("/uploadProjectAttach")
+//    Observable<MobileResponse<String>> uploadProjectAttach(@FieldMap Map<String, String> param, @PartMap Map<String, RequestBody> files);
+    Observable<MobileResponse<String>> uploadProjectAttach(@PartMap Map<String, RequestBody> params);
+
 
     //    @FormUrlEncoded
 //    @POST("query?key=7c2d1da3b8634a2b9fe8848c3a9edcba")
