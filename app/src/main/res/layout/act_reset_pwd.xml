@@ -43,6 +43,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:hint="@string/please_input_pwd" />
 
     </android.support.design.widget.TextInputLayout>
@@ -58,7 +59,8 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/please_input_pwd_again" />
+            android:hint="@string/please_input_pwd_again"
+            android:inputType="textPassword"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -73,6 +75,7 @@
         android:background="@drawable/sele_common_btn"
         android:onClick="resetOnClick"
         android:text="@string/sign_in"
+
         android:textColor="@android:color/white"
         android:textSize="32px" />
 

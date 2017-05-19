@@ -1,9 +1,11 @@
 package com.sttech.supervisor.utils;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.design.widget.TabLayout;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -11,6 +13,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 /**
  * function :通用公共类
@@ -66,6 +69,7 @@ public class CommonUtils {
         imm.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
     }
 
+
     public static void setIndicator(TabLayout tabs, int leftDip, int rightDip) {
         Class<?> tabLayout = tabs.getClass();
         Field tabStrip = null;
@@ -95,7 +99,28 @@ public class CommonUtils {
             child.setLayoutParams(params);
             child.invalidate();
         }
+    }
 
-
+    /**
+     * 应用是否在前台或者后台运行
+     *
+     * @param context
+     * @return
+     */
+    public static boolean isBackground(Context context) {
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
+        for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
+            if (appProcess.processName.equals(context.getPackageName())) {
+                if (appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
+                    Log.i("后台", appProcess.processName);
+                    return true;
+                } else {
+                    Log.i("前台", appProcess.processName);
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 }
