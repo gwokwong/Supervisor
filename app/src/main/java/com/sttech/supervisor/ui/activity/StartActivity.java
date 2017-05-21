@@ -31,7 +31,12 @@ public class StartActivity extends TActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_start);
-        getPermission();
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            initData();
+        }else {
+            getPermission();
+        }
+
     }
 
     private void initData() {
