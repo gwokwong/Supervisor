@@ -9,7 +9,6 @@ import com.sttech.supervisor.dto.ImageDto;
 import com.sttech.supervisor.dto.MobileResponse;
 import com.sttech.supervisor.dto.ProjectAttachDto;
 import com.sttech.supervisor.dto.ProjectPageDto;
-//import com.sttech.supervisor.entity.Daily;
 import com.sttech.supervisor.http.api.RestApi;
 import com.sttech.supervisor.http.cache.CacheProvider;
 import com.sttech.supervisor.http.cookies.NovateCookieManger;
