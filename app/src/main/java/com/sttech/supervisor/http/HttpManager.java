@@ -3,7 +3,6 @@ package com.sttech.supervisor.http;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.telecom.Call;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -28,7 +27,6 @@ import java.util.concurrent.TimeUnit;
 
 import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
