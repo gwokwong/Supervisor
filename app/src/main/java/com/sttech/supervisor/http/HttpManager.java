@@ -1,7 +1,11 @@
 package com.sttech.supervisor.http;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.telecom.Call;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.sttech.supervisor.Constant;
@@ -13,14 +17,18 @@ import com.sttech.supervisor.http.api.RestApi;
 import com.sttech.supervisor.http.cache.CacheProvider;
 import com.sttech.supervisor.http.cookies.NovateCookieManger;
 import com.sttech.supervisor.http.exception.ApiException;
+import com.sttech.supervisor.ui.activity.SignInActivity;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -30,14 +38,14 @@ import io.rx_cache2.DynamicKey;
 import io.rx_cache2.EvictDynamicKey;
 import io.rx_cache2.internal.RxCache;
 import io.victoralbertos.jolyglot.GsonSpeaker;
+import okhttp3.Interceptor;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Field;
 
 public class HttpManager {
     public static final String TAG = HttpManager.class.getSimpleName();
@@ -96,6 +104,14 @@ public class HttpManager {
         }
         return instance;
     }
+
+    static Interceptor signInInterceptor = new Interceptor() {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+
+            return null;
+        }
+    };
 
     public static void init(Context context) {
         mContext = context;
@@ -163,6 +179,7 @@ public class HttpManager {
 ////                .observeOn(AndroidSchedulers.mainThread())
 ////                .subscribe(subscriber);
 //    }
+
 
     /**
      * 登录
@@ -276,7 +293,6 @@ public class HttpManager {
 
     public static RequestBody toRequestBodyOfImage(File pFile) {
         RequestBody fileBody = RequestBody.create(MediaType.parse("image/*"), pFile);
-
 //        new MultipartBody.Builder().setType(MultipartBody.FORM)
 //                        .addFormDataPart("file", f.getName(), RequestBody.create(MEDIA_TYPE_PNG, f));
         return fileBody;
@@ -305,28 +321,71 @@ public class HttpManager {
 //                .subscribe(s);
 //    }
 
-    private <T> void toSubscribe(Observable<MobileResponse<T>> o, Observer<T> s) {
+    /**
+     * @param o
+     * @param s
+     * @param <T>
+     */
+    private <T> void toSubscribe(Observable<MobileResponse<T>> o, final Observer<T> s) {
         o.subscribeOn(Schedulers.io())
                 .map(new Function<MobileResponse<T>, T>() {
                     @Override
                     public T apply(@NonNull MobileResponse<T> tMobileResponse) throws Exception {
-
                         int code = tMobileResponse.getCode();
                         if (code == MobileResponse.CODE_OK) {
                             return tMobileResponse.getData();
                         } else if (code == MobileResponse.CODE_INVALID_SESSION) {
-                            throw new ApiException(code, "请求超时");
+                            Toasty.error(mContext, "登陆超时,现在登陆到登录界面", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(mContext, SignInActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            mContext.startActivity(intent);
+                            ((Activity) mContext).finish();
+//                            s.onError(new Throwable(String.valueOf(MobileResponse.CODE_INVALID_SESSION)));
+//                            throw new ApiException(code, "请求超时");
                         } else if (code == MobileResponse.CODE_LOGIC_EXCEPTION) {
                             throw new ApiException(code, tMobileResponse.getMessage());
                         }
                         return null;
                     }
                 })
+//                .retryWhen(new Function<Observable<Throwable>, ObservableSource<?>>() {
+//                    @Override
+//                    public ObservableSource<?> apply(final @NonNull Observable<Throwable> throwableObservable) throws Exception {
+//                        throwableObservable.map(new Function<Throwable, Object>() {
+//                            @Override
+//                            public Object apply(@NonNull Throwable throwable) throws Exception {
+//                                if(throwable.getMessage().equals(String.valueOf(MobileResponse.CODE_INVALID_SESSION))){
+//                                    throwableObservable.just(null);
+//                                }
+//                                return null;
+//                            }
+//                        });
+//                        //TODO 判断是否需要重新请求
+//                        return null;
+//                    }
+//                })
+// .retryWhen(new TokenExpireInterceptor())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s);
-
     }
 
-
+    /**
+     * 重试策略
+     */
+//    public class TokenExpireInterceptor implements Function<Observable<? extends Throwable>, Observable<?>> {
+//
+//
+//        public TokenExpireInterceptor(){
+//
+//        }
+//
+//        @Override
+//        public Observable<?> apply(@NonNull Observable<? extends Throwable> observable) throws Exception {
+//            observable.map(new Function<, T>() {
+//
+//            });
+//
+//            return null;
+//        }
+//    }
 }
