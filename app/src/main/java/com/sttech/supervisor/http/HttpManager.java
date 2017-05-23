@@ -10,8 +10,10 @@ import android.widget.Toast;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.orhanobut.logger.Logger;
+import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.sttech.supervisor.Constant;
 import com.sttech.supervisor.MyApp;
+import com.sttech.supervisor.db.MobileLoginResult;
 import com.sttech.supervisor.dto.ImageDto;
 import com.sttech.supervisor.dto.MobileResponse;
 import com.sttech.supervisor.dto.ProjectAttachDto;
@@ -407,6 +409,7 @@ public class HttpManager {
 
             @Override
             public void onNext(String s) {
+                Delete.table(MobileLoginResult.class);
                 Intent intent = new Intent(mContext, SignInActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
 
