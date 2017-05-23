@@ -430,17 +430,12 @@ public class HttpManager {
             @Override
             public void subscribe(ObservableEmitter<String> e) throws Exception {
                 Toasty.error(mContext, "登录超时,回到登录界面", Toast.LENGTH_SHORT).show();
-                Thread.sleep(3000);
+//                Thread.sleep(3000);
                 e.onNext("");
-
-
             }
-        })
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread()).delaySubscription(2,TimeUnit.MINUTES);
+        }).subscribeOn(AndroidSchedulers.mainThread()).observeOn(AndroidSchedulers.mainThread()).delaySubscription(3,TimeUnit.MINUTES);
 
         observable.subscribe(observer);
-
     }
 
     /**
