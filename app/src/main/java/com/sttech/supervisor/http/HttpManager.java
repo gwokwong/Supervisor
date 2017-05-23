@@ -3,11 +3,15 @@ package com.sttech.supervisor.http;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.orhanobut.logger.Logger;
 import com.sttech.supervisor.Constant;
+import com.sttech.supervisor.MyApp;
 import com.sttech.supervisor.dto.ImageDto;
 import com.sttech.supervisor.dto.MobileResponse;
 import com.sttech.supervisor.dto.ProjectAttachDto;
@@ -27,9 +31,12 @@ import java.util.concurrent.TimeUnit;
 
 import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import io.rx_cache2.DynamicKey;
@@ -68,7 +75,7 @@ public class HttpManager {
         builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
 //                .retryOnConnectionFailure(false)
                 .addInterceptor(loggingInterceptor)
-                .cookieJar(new NovateCookieManger(mContext))
+                .cookieJar(new NovateCookieManger(mContext))  //TODO cookies管理
 //                .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
 //        .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
@@ -319,6 +326,7 @@ public class HttpManager {
 //                .subscribe(s);
 //    }
 
+
     /**
      * @param o
      * @param s
@@ -333,10 +341,13 @@ public class HttpManager {
                         if (code == MobileResponse.CODE_OK) {
                             return tMobileResponse.getData();
                         } else if (code == MobileResponse.CODE_INVALID_SESSION) {
-                            Toasty.error(mContext, "登陆超时,现在登陆到登录界面", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(mContext, SignInActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            mContext.startActivity(intent);
-                            ((Activity) mContext).finish();
+                            Logger.d("code == MobileResponse.CODE_INVALID_SESSION");
+                            jumpLoginAction();
+//                            Toasty.error(MyApp.getInstance(), "登陆超时,现在登陆到登录界面", Toast.LENGTH_SHORT).show();
+////                            Toasty.error(mContext, "登陆超时,现在登陆到登录界面", Toast.LENGTH_SHORT).show();
+//                            Intent intent = new Intent(mContext, SignInActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                            mContext.startActivity(intent);
+//                            ((Activity) mContext).finish();
 //                            s.onError(new Throwable(String.valueOf(MobileResponse.CODE_INVALID_SESSION)));
 //                            throw new ApiException(code, "请求超时");
                         } else if (code == MobileResponse.CODE_LOGIC_EXCEPTION) {
@@ -365,6 +376,68 @@ public class HttpManager {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s);
+    }
+
+    public Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+//                    Toasty.error(MyApp.getmContext(), "登陆超时,现在登陆到登录界面", Toast.LENGTH_SHORT).show();
+                    sendEmptyMessageDelayed(1, 500);
+                    break;
+                case 1:
+                    Intent intent = new Intent(mContext, SignInActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(intent);
+                    ((Activity) mContext).finish();
+                    break;
+            }
+        }
+    };
+
+    public void jumpLoginAction() {
+//        handler.sendEmptyMessage(0);
+
+        Observer<String> observer = new Observer<String>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+                Intent intent = new Intent(mContext, SignInActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
+        Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> e) throws Exception {
+                Toasty.error(mContext, "登录超时,回到登录界面", Toast.LENGTH_SHORT).show();
+                Thread.sleep(3000);
+                e.onNext("");
+
+
+            }
+        })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread());
+
+        observable.subscribe(observer);
+
     }
 
     /**

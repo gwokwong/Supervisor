@@ -42,11 +42,11 @@ public abstract class TActivity extends AutoLayoutActivity {
     }
 
     public void toast(String msg) {
-        Toasty.success(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+        Toasty.success(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
     public void toaste(String msg) {
-        Toasty.error(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+        Toasty.error(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
 

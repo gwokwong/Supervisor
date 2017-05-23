@@ -277,7 +277,8 @@ public class HomeFragment extends TFragment {
 
     private DialogFragment mDialogFragment;
 
-    private void test() {
+    @Override
+    public void initData() {
         HttpSubscriber httpSubscriber = new HttpSubscriber(new OnResultCallBack<String>() {
 
             @Override
@@ -287,12 +288,14 @@ public class HomeFragment extends TFragment {
 
             @Override
             public void onSuccess(String data) {
-                toastInfo(data);
+//                toastInfo(data);
+                Logger.d("onSuccess"+data);
             }
 
             @Override
             public void onError(int code, String errorMsg) {
-                toastInfo(errorMsg);
+//                toastInfo(errorMsg);
+                Logger.d("onError"+errorMsg);
 
             }
 
@@ -302,6 +305,10 @@ public class HomeFragment extends TFragment {
             }
         });
         HttpManager.getInstance().getLocation(httpSubscriber);
+    }
+
+    private void test() {
+
     }
 
     @Override
