@@ -437,7 +437,7 @@ public class HttpManager {
             }
         })
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread()).delaySubscription(2,TimeUnit.MINUTES);
 
         observable.subscribe(observer);
 
