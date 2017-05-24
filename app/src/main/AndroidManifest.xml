@@ -73,8 +73,6 @@
 
         <activity android:name=".ui.activity.WriteWorkRecordActivity" />
 
-        <activity android:name=".ui.activity.PictureExternalPreviewActivity" />
-
         <activity android:name=".ui.activity.PicturePreviewActivity" />
 
         <activity android:name=".ui.activity.ErrorPromptActivity" />
@@ -88,6 +86,8 @@
         <activity android:name=".ui.activity.SendMsgFailActivity" />
 
         <activity android:name=".ui.activity.SelectTimePeriodActivity" />
+
+        <activity android:name=".ui.activity.SelectedDateActivity" />
 
 
         <activity

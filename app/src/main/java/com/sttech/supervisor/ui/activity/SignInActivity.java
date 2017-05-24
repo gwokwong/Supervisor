@@ -64,6 +64,7 @@ public class SignInActivity extends TActivity {
         if (view.getId() == R.id.sign_in) {
             doValidate();
         } else if (view.getId() == R.id.forget_pwd) {
+//            startActivity(new Intent(SignInActivity.this,SelectedDateActivity.class));
             ForgetPwdActivity.start(SignInActivity.this);
         }
     }

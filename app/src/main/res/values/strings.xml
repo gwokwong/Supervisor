@@ -49,7 +49,7 @@
     <string name="please_input_mobile_phone">请输入手机号</string>
     <string name="please_input_verification_code">请输入验证码</string>
     <string name="send_verification_code">发送验证码</string>
-    <string name="next">下一步</string>
+    <string name="next_step">下一步</string>
     <string name="project_title_simple">创业公司装修</string>
     <string name="project_time_simple">2017-3-28 19:00</string>
     <string name="project_tv1">客户经理</string>
@@ -111,6 +111,10 @@
     <string name="aboutDecorationCompanyLabel">装修公司</string>
     <string name="buyForLabel">采购标准</string>
     <string name="belongToIndustry">行业说明</string>
+
+    <string name="previous">Go to previous</string>
+    <string name="next">Go to next</string>
+    <string name="calendar">Calendar</string>
 
 
 </resources>
