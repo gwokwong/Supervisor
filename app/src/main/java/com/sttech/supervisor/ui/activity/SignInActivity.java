@@ -108,9 +108,11 @@ public class SignInActivity extends TActivity {
             toaste("密码输入不正确");
             passwordWrapper.setError("Not a valid password!");
         } else {
-            usernameWrapper.setErrorEnabled(false);
-            passwordWrapper.setErrorEnabled(false);
-            doLogin(username, password);
+//            usernameWrapper.setErrorEnabled(false);
+//            passwordWrapper.setErrorEnabled(false);
+//            doLogin(username, password);
+
+            MainActivity.start(SignInActivity.this);
         }
     }
 
