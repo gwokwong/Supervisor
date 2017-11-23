@@ -3,6 +3,7 @@ package com.sttech.supervisor.ui.fragment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -37,6 +38,7 @@ import com.sttech.supervisor.ui.adapter.ProjectListAdapter;
 import com.sttech.supervisor.ui.fragment.dialog.DialogFragmentHelper;
 import com.sttech.supervisor.ui.widget.AdvanceDecoration;
 import com.sttech.supervisor.ui.widget.DropDownMenu;
+import com.sttech.supervisor.ui.widget.RecycleViewDivider;
 import com.sttech.supervisor.ui.widget.SpacesItemDecoration;
 import com.sttech.supervisor.ui.widget.citypicker.adapter.CityListAdapter;
 import com.sttech.supervisor.ui.widget.citypicker.adapter.ResultListAdapter;
@@ -119,8 +121,21 @@ public class HomeFragment extends TFragment {
             }
         });
 
-        xRecyclerView.addItemDecoration(new AdvanceDecoration(getActivity(), OrientationHelper.VERTICAL, dip2px(15)));
+//        xRecyclerView.addItemDecoration(new AdvanceDecoration(getActivity(), OrientationHelper.VERTICAL, dip2px(15)));
 //        xRecyclerView.addItemDecoration(new SpacesItemDecoration(0, dip2px(15)));
+
+
+        //添加默认分割线：高度为2px，颜色为灰色
+//        xRecyclerView.addItemDecoration(new RecycleViewDivider(getActivity(), LinearLayoutManager.VERTICAL));
+
+        //添加自定义分割线：可自定义分割线drawable
+        xRecyclerView.addItemDecoration(new RecycleViewDivider(
+                getActivity(), LinearLayoutManager.VERTICAL, R.drawable.divider_mileage));
+        //添加自定义分割线：可自定义分割线高度和颜色
+//        xRecyclerView.addItemDecoration(new RecycleViewDivider(
+//                getActivity(), LinearLayoutManager.VERTICAL, 10, getResources().getColor(R.color.divide_gray_color));
+
+
     }
 
     private DropDownMenu mDropDownMenu;
